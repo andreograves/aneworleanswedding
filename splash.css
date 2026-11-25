@@ -1,8 +1,9 @@
 :root {
   --paper: #f8f4ec;
   --ink: #2f3a33;
-  --gold: #b8955a;
+  --gold: #c9a45f;
   --deep: #23312a;
+  --maroon: #5c1a24;
   --red: #c9252c;
   --card: #efe9dd;
   --w: clamp(150px, 30vmin, 210px);
@@ -40,15 +41,15 @@ body {
   border-radius: var(--r);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  box-shadow: 0 1px 2px rgba(0,0,0,.18), 0 6px 18px rgba(35,49,42,.16);
+  box-shadow: 0 1px 2px rgba(0,0,0,.18), 0 6px 18px rgba(70,22,30,.18);
 }
 
-/* Back: deep green, gold double frame, fleur-de-lis */
+/* Back: maroon, gold double frame, gold fleur-de-lis */
 .back {
   background:
     repeating-linear-gradient(45deg, rgba(184,149,90,.07) 0 1px, transparent 1px 9px),
     repeating-linear-gradient(-45deg, rgba(184,149,90,.07) 0 1px, transparent 1px 9px),
-    var(--deep);
+    var(--maroon);
   padding: calc(var(--w) * 0.06);
 }
 .back-frame {
@@ -68,7 +69,7 @@ body {
   transform: rotateY(180deg);
   color: var(--red);
   border: 1px solid rgba(60,40,20,.08);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.5), 0 1px 2px rgba(0,0,0,.18), 0 6px 18px rgba(35,49,42,.16);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.5), 0 1px 2px rgba(0,0,0,.18), 0 6px 18px rgba(70,22,30,.18);
 }
 .pip {
   position: absolute; left: 50%; top: 50%;
