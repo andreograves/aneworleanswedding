@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 100 102" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+  <!-- center petal -->
+  <path d="M50 6 C63 24 65 46 50 66 C35 46 37 24 50 6 Z"/>
+  <!-- right petal -->
+  <path d="M55 66 C58 48 74 36 87 41 C97 45 96 60 86 61 C79 62 77 54 82 51"/>
+  <!-- left petal -->
+  <path d="M45 66 C42 48 26 36 13 41 C3 45 4 60 14 61 C21 62 23 54 18 51"/>
+  <!-- band -->
+  <path d="M34 69 H66 M34 75 H66"/>
+  <!-- foot -->
+  <path d="M50 75 C50 86 47 94 44 100 M50 75 C50 86 53 94 56 100"/>
+  <path d="M44 75 C38 84 30 88 24 88 M56 75 C62 84 70 88 76 88"/>
+</svg>
