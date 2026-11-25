@@ -1,0 +1,101 @@
+:root {
+  --paper: #f8f4ec;
+  --ink: #2f3a33;
+  --gold: #b8955a;
+  --deep: #23312a;
+  --red: #a3212b;
+  --w: clamp(150px, 30vmin, 210px);
+  --h: calc(var(--w) * 1.4);
+  --r: calc(var(--w) * 0.07);
+  --lift: -5vh;      /* how far the ace rises */
+  --grow: 1.2;       /* how much the ace grows */
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  background: radial-gradient(ellipse at center, #fbf8f2 0%, var(--paper) 55%, #efe7d8 100%);
+  color: var(--ink);
+  overflow: hidden;
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+.table { position: fixed; inset: 0; perspective: 1400px; }
+
+/* ---------- Cards ---------- */
+.card {
+  position: absolute; left: 50%; top: 50%;
+  width: var(--w); height: var(--h);
+  margin: calc(var(--h) / -2) 0 0 calc(var(--w) / -2);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.card-inner {
+  position: relative; width: 100%; height: 100%;
+  transform-style: preserve-3d;
+}
+.face {
+  position: absolute; inset: 0;
+  border-radius: var(--r);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: 0 1px 2px rgba(0,0,0,.18), 0 6px 18px rgba(35,49,42,.16);
+}
+
+/* Back: deep green, gold double frame, fleur-de-lis */
+.back {
+  background:
+    repeating-linear-gradient(45deg, rgba(184,149,90,.07) 0 1px, transparent 1px 9px),
+    repeating-linear-gradient(-45deg, rgba(184,149,90,.07) 0 1px, transparent 1px 9px),
+    var(--deep);
+  padding: calc(var(--w) * 0.06);
+}
+.back-frame {
+  width: 100%; height: 100%;
+  border: 1px solid var(--gold);
+  outline: 1px solid rgba(184,149,90,.55);
+  outline-offset: calc(var(--w) * -0.035);
+  border-radius: calc(var(--r) * 0.6);
+  display: grid; place-items: center;
+  color: var(--gold);
+}
+.back-fdl { width: 46%; height: 46%; }
+
+/* Front: ace of hearts */
+.front {
+  background: #fffdf8;
+  transform: rotateY(180deg);
+  color: var(--red);
+  border: 1px solid rgba(0,0,0,.06);
+}
+.pip {
+  position: absolute; left: 50%; top: 50%;
+  width: 38%; height: 30%;
+  transform: translate(-50%, -50%);
+}
+.corner {
+  position: absolute;
+  display: flex; flex-direction: column; align-items: center;
+  line-height: 1;
+}
+.corner span { font-size: calc(var(--w) * 0.17); font-weight: 500; }
+.corner svg { width: calc(var(--w) * 0.1); height: calc(var(--w) * 0.09); margin-top: 2px; }
+.corner.tl { top: 7%; left: 8%; }
+.corner.br { bottom: 7%; right: 8%; transform: rotate(180deg); }
+
+/* ---------- Enter ---------- */
+.enter {
+  position: fixed; left: 50%;
+  top: calc(50% + var(--lift) + var(--h) * var(--grow) / 2 + 36px);
+  transform: translate(-50%, 8px);
+  font-family: "Montserrat", system-ui, sans-serif;
+  font-size: .78rem; letter-spacing: .42em; text-transform: uppercase;
+  text-decoration: none; color: var(--ink);
+  padding: 14px 18px 14px 26px;     /* extra left balances letter-spacing */
+  border-top: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+  opacity: 0; pointer-events: none;
+  transition: opacity 1s ease, transform 1s ease, color .2s, background .2s;
+}
+.enter.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.enter:hover, .enter:focus-visible { color: var(--paper); background: var(--deep); outline: none; }

@@ -10,166 +10,54 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Pinyon+Script&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="splash.css">
 </head>
 <body>
 
-  <header class="site-header">
-    <a class="monogram" href="#top" aria-label="Home">A <span>&amp;</span> A</a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
-    <nav id="nav" class="nav">
-      <a href="#story">Our Story</a>
-      <a href="#details">Details</a>
-      <a href="#travel">Travel</a>
-      <a href="#registry">Registry</a>
-      <a href="#faq">FAQ</a>
-      <a href="#rsvp" class="nav-rsvp">RSVP</a>
-    </nav>
-  </header>
+  <!-- Shared drawings -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="fdl" viewBox="0 2 100 102">
+        <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M50 6 C63 24 65 46 50 66 C35 46 37 24 50 6 Z"/>
+          <path d="M55 66 C58 48 74 36 87 41 C97 45 96 60 86 61 C79 62 77 54 82 51"/>
+          <path d="M45 66 C42 48 26 36 13 41 C3 45 4 60 14 61 C21 62 23 54 18 51"/>
+          <path d="M34 69 H66 M34 75 H66"/>
+          <path d="M50 75 C50 86 47 94 44 100 M50 75 C50 86 53 94 56 100"/>
+          <path d="M44 75 C38 84 30 88 24 88 M56 75 C62 84 70 88 76 88"/>
+        </g>
+      </symbol>
+      <symbol id="heart" viewBox="0 0 100 92">
+        <path fill="currentColor" d="M50 90 C46 86 6 58 3 32 C0 12 14 2 28 2 C39 2 46 9 50 17 C54 9 61 2 72 2 C86 2 100 12 97 32 C94 58 54 86 50 90 Z"/>
+      </symbol>
+    </defs>
+  </svg>
 
-  <main id="top">
-
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-frame">
-        <p class="eyebrow">Together with their families</p>
-        <h1 class="names">
-          <span class="name">Ailsa</span>
-          <span class="amp">&amp;</span>
-          <span class="name">André</span>
-        </h1>
-        <div class="emblem" aria-hidden="true">
-          <span class="rule"></span>
-          <svg viewBox="0 2 100 102" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M50 6 C63 24 65 46 50 66 C35 46 37 24 50 6 Z"/>
-            <path d="M55 66 C58 48 74 36 87 41 C97 45 96 60 86 61 C79 62 77 54 82 51"/>
-            <path d="M45 66 C42 48 26 36 13 41 C3 45 4 60 14 61 C21 62 23 54 18 51"/>
-            <path d="M34 69 H66 M34 75 H66"/>
-            <path d="M50 75 C50 86 47 94 44 100 M50 75 C50 86 53 94 56 100"/>
-            <path d="M44 75 C38 84 30 88 24 88 M56 75 C62 84 70 88 76 88"/>
-          </svg>
-          <span class="rule"></span>
-        </div>
-        <p class="date">January 8, 2028</p>
-        <p class="place">New Orleans, Louisiana</p>
-        <ul class="countdown" aria-live="polite">
-          <li><span id="cd-days">--</span><small>Days</small></li>
-          <li><span id="cd-hours">--</span><small>Hours</small></li>
-          <li><span id="cd-mins">--</span><small>Minutes</small></li>
-        </ul>
-        <a class="btn" href="#rsvp">RSVP</a>
-      </div>
-    </section>
-
-    <!-- OUR STORY -->
-    <section id="story" class="section">
-      <h2 class="section-title">Our Story</h2>
-      <div class="divider" aria-hidden="true"><img src="assets/fleur-de-lis.svg" alt=""></div>
-      <div class="prose">
-        <p>Every love story is beautiful, but ours is our favorite. Share how you met, your first date, and the moment you knew. This is the place to tell guests the story of Ailsa and André.</p>
-        <p class="placeholder-note">Add your story and a few favorite photos here.</p>
-      </div>
-      <div class="photo-row">
-        <div class="photo"><span>Photo</span></div>
-        <div class="photo"><span>Photo</span></div>
-        <div class="photo"><span>Photo</span></div>
-      </div>
-    </section>
-
-    <!-- DETAILS -->
-    <section id="details" class="section section-alt">
-      <h2 class="section-title">The Details</h2>
-      <div class="divider" aria-hidden="true"><img src="assets/fleur-de-lis.svg" alt=""></div>
-      <p class="lede">Saturday, the eighth of January<br>two thousand twenty-eight</p>
-      <div class="cards">
-        <article class="card">
-          <h3>Ceremony</h3>
-          <p class="time">Time to be announced</p>
-          <p>Venue name<br>Street address<br>New Orleans, LA</p>
-        </article>
-        <article class="card">
-          <h3>Reception</h3>
-          <p class="time">To follow</p>
-          <p>Venue name<br>Street address<br>New Orleans, LA</p>
-        </article>
-        <article class="card">
-          <h3>Attire</h3>
-          <p class="time">Formal</p>
-          <p>January evenings in New Orleans can be cool. Bring a wrap or jacket.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- TRAVEL -->
-    <section id="travel" class="section">
-      <h2 class="section-title">Travel &amp; Stay</h2>
-      <div class="divider" aria-hidden="true"><img src="assets/fleur-de-lis.svg" alt=""></div>
-      <div class="two-col">
-        <div>
-          <h3>Getting Here</h3>
-          <p>Fly into Louis Armstrong New Orleans International Airport (MSY), about 25 minutes from the French Quarter by car.</p>
-          <h3>Getting Around</h3>
-          <p>The French Quarter and Garden District are best explored on foot or by streetcar. Rideshares are easy to find throughout the city.</p>
-        </div>
-        <div>
-          <h3>Where to Stay</h3>
-          <p>We're arranging a hotel room block for our guests. Booking details will be posted here.</p>
-          <h3>While You're Here</h3>
-          <p>Beignets, jazz on Frenchmen Street, a streetcar ride down St. Charles Avenue. We'll share our favorite spots closer to the date.</p>
+  <main class="table" id="table" aria-label="Ailsa and André">
+    <template id="card-tpl">
+      <div class="card">
+        <div class="card-inner">
+          <div class="face back">
+            <div class="back-frame">
+              <svg class="back-fdl"><use href="#fdl"/></svg>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
+    </template>
 
-    <!-- REGISTRY -->
-    <section id="registry" class="section section-alt">
-      <h2 class="section-title">Registry</h2>
-      <div class="divider" aria-hidden="true"><img src="assets/fleur-de-lis.svg" alt=""></div>
-      <div class="prose">
-        <p>Your presence at our wedding is the greatest gift of all. For those who have asked, our registry will be linked here.</p>
+    <template id="ace-front">
+      <div class="face front">
+        <div class="corner tl"><span>A</span><svg><use href="#heart"/></svg></div>
+        <svg class="pip"><use href="#heart"/></svg>
+        <div class="corner br"><span>A</span><svg><use href="#heart"/></svg></div>
       </div>
-      <a class="btn btn-outline" href="#registry">Coming Soon</a>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq" class="section">
-      <h2 class="section-title">Questions</h2>
-      <div class="divider" aria-hidden="true"><img src="assets/fleur-de-lis.svg" alt=""></div>
-      <div class="faq">
-        <details>
-          <summary>When should I RSVP by?</summary>
-          <p>We'll share the RSVP deadline with formal invitations.</p>
-        </details>
-        <details>
-          <summary>Can I bring a guest?</summary>
-          <p>Your invitation will list the guests we've reserved seats for.</p>
-        </details>
-        <details>
-          <summary>Are children welcome?</summary>
-          <p>Details to come.</p>
-        </details>
-        <details>
-          <summary>What's the weather like in January?</summary>
-          <p>Mild, with highs around 60°F and cooler evenings around 45°F.</p>
-        </details>
-      </div>
-    </section>
-
-    <!-- RSVP -->
-    <section id="rsvp" class="section section-dark">
-      <h2 class="section-title">RSVP</h2>
-      <div class="divider" aria-hidden="true"><img src="assets/fleur-de-lis.svg" alt=""></div>
-      <p class="lede">We can't wait to celebrate with you.</p>
-      <p>Online RSVPs will open once invitations are sent.</p>
-    </section>
-
+    </template>
   </main>
 
-  <footer class="site-footer">
-    <p class="footer-names">Ailsa &amp; André</p>
-    <p>01 · 08 · 2028 · New Orleans</p>
-  </footer>
+  <a class="enter" id="enter" href="home.html" lang="fr">Entrer</a>
 
-  <script src="script.js"></script>
+  <script src="splash.js"></script>
 </body>
 </html>

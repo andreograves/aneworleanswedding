@@ -2,7 +2,9 @@
 
 Static wedding website (plain HTML/CSS/JS, no build step).
 
-- `index.html` — all page content (edit text here)
+- `index.html` — splash page (shuffling cards → ace of hearts → "Entrer")
+- `splash.css`, `splash.js` — splash styling and card animation
+- `home.html` — main site content (edit text here)
 - `styles.css` — colors, fonts, layout (palette variables at the top)
 - `script.js` — countdown + mobile menu
 - `assets/fleur-de-lis.svg` — the minimalist fleur-de-lis emblem
