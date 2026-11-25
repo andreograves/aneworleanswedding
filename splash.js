@@ -13,6 +13,7 @@
   try { muted = localStorage.getItem("aa-muted") === "1"; } catch (e) {}
   var ctx = null, noise = null, master = null;
   var MUSIC_VOL = 0.38;
+  var SFX_VOL = 2.2;   // card sounds level
 
   function initAudio() {
     if (ctx) return;
@@ -20,8 +21,11 @@
     if (!AC) return;
     ctx = new AC();
     master = ctx.createGain();
-    master.gain.value = muted ? 0 : 0.9;
-    master.connect(ctx.destination);
+    master.gain.value = muted ? 0 : SFX_VOL;
+    var limiter = ctx.createDynamicsCompressor();
+    limiter.threshold.value = -10; limiter.knee.value = 6; limiter.ratio.value = 12;
+    limiter.attack.value = 0.002; limiter.release.value = 0.12;
+    master.connect(limiter); limiter.connect(ctx.destination);
     noise = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
     var d = noise.getChannelData(0);
     for (var i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
@@ -48,25 +52,25 @@
   var sfx = {
     // a single card edge flicking past another
     flick: function (t, v) {
-      burst(t, { f0: 2600 + Math.random() * 2200, q: 1.4, vol: 0.32 * (v || 1), dur: 0.028 });
-      burst(t, { type: "lowpass", f0: 900, vol: 0.12 * (v || 1), dur: 0.02 });
+      burst(t, { f0: 2600 + Math.random() * 2200, q: 1.4, vol: 0.5 * (v || 1), dur: 0.032 });
+      burst(t, { type: "lowpass", f0: 900, vol: 0.22 * (v || 1), dur: 0.024 });
     },
     // cards sliding across each other / the table
     slide: function (t, dur, v) {
-      burst(t, { f0: 900, f1: 2800, q: 0.8, vol: 0.14 * (v || 1), dur: dur, attack: dur * 0.4 });
+      burst(t, { f0: 900, f1: 2800, q: 0.8, vol: 0.26 * (v || 1), dur: dur, attack: dur * 0.4 });
     },
     // the deck squaring up
     thump: function (t, v) {
-      burst(t, { type: "lowpass", f0: 520, q: 0.7, vol: 0.5 * (v || 1), dur: 0.09 });
+      burst(t, { type: "lowpass", f0: 520, q: 0.7, vol: 0.7 * (v || 1), dur: 0.1 });
       burst(t, { f0: 1800, q: 1, vol: 0.1 * (v || 1), dur: 0.03 });
     },
     // cards flying away
     whoosh: function (t, dur) {
-      burst(t, { f0: 350, f1: 2400, q: 0.6, vol: 0.22, dur: dur, attack: dur * 0.3 });
+      burst(t, { f0: 350, f1: 2400, q: 0.6, vol: 0.38, dur: dur, attack: dur * 0.3 });
     },
     // the ace turning over
     snap: function (t) {
-      burst(t, { f0: 3200, q: 2, vol: 0.45, dur: 0.035 });
+      burst(t, { f0: 3200, q: 2, vol: 0.6, dur: 0.04 });
       burst(t, { type: "lowpass", f0: 700, vol: 0.3, dur: 0.06 });
     }
   };
@@ -93,7 +97,7 @@
     try { localStorage.setItem("aa-muted", m ? "1" : "0"); } catch (e) {}
     soundBtn.setAttribute("aria-pressed", m ? "false" : "true");
     soundBtn.classList.toggle("off", m);
-    if (master) master.gain.setTargetAtTime(m ? 0 : 0.9, ctx.currentTime, 0.05);
+    if (master) master.gain.setTargetAtTime(m ? 0 : SFX_VOL, ctx.currentTime, 0.05);
     if (music) {
       if (!m && music.paused) startMusic();
       else fadeMusic(m ? 0 : MUSIC_VOL, 400);
