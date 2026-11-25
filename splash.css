@@ -3,10 +3,11 @@
   --ink: #2f3a33;
   --gold: #b8955a;
   --deep: #23312a;
-  --red: #a3212b;
+  --red: #c9252c;
+  --card: #efe9dd;
   --w: clamp(150px, 30vmin, 210px);
   --h: calc(var(--w) * 1.4);
-  --r: calc(var(--w) * 0.07);
+  --r: calc(var(--w) * 0.055);
   --lift: -5vh;      /* how far the ace rises */
   --grow: 1.2;       /* how much the ace grows */
 }
@@ -61,27 +62,31 @@ body {
 }
 .back-fdl { width: 46%; height: 46%; }
 
-/* Front: ace of hearts */
+/* Front: ace of hearts (traditional) */
 .front {
-  background: #fffdf8;
+  background: var(--card);
   transform: rotateY(180deg);
   color: var(--red);
-  border: 1px solid rgba(0,0,0,.06);
+  border: 1px solid rgba(60,40,20,.08);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.5), 0 1px 2px rgba(0,0,0,.18), 0 6px 18px rgba(35,49,42,.16);
 }
 .pip {
   position: absolute; left: 50%; top: 50%;
-  width: 38%; height: 30%;
+  width: 21%; height: 19%;
   transform: translate(-50%, -50%);
 }
 .corner {
   position: absolute;
   display: flex; flex-direction: column; align-items: center;
-  line-height: 1;
+  line-height: .9;
 }
-.corner span { font-size: calc(var(--w) * 0.17); font-weight: 500; }
-.corner svg { width: calc(var(--w) * 0.1); height: calc(var(--w) * 0.09); margin-top: 2px; }
-.corner.tl { top: 7%; left: 8%; }
-.corner.br { bottom: 7%; right: 8%; transform: rotate(180deg); }
+.corner span {
+  font-family: "Playfair Display", "Didot", "Bodoni 72", Georgia, serif;
+  font-size: calc(var(--w) * 0.16); font-weight: 700;
+}
+.corner svg { width: calc(var(--w) * 0.075); height: calc(var(--w) * 0.07); margin-top: calc(var(--w) * 0.02); }
+.corner.tl { top: 6%; left: 7%; }
+.corner.br { bottom: 6%; right: 7%; transform: rotate(180deg); }
 
 /* ---------- Enter ---------- */
 .enter {
