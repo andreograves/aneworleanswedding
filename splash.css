@@ -104,3 +104,34 @@ body {
 }
 .enter.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
 .enter:hover, .enter:focus-visible { color: var(--paper); background: var(--deep); outline: none; }
+
+/* ---------- Tap prompt ---------- */
+.prompt {
+  position: fixed; left: 50%; margin: 0;
+  top: calc(50% + var(--h) / 2 + 36px);
+  transform: translateX(-50%);
+  font-family: "Montserrat", system-ui, sans-serif;
+  font-size: .7rem; letter-spacing: .35em; text-transform: uppercase;
+  color: var(--ink); opacity: .7; white-space: nowrap;
+  animation: breathe 2.4s ease-in-out infinite;
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+.prompt.hide { animation: none; opacity: 0; }
+@keyframes breathe { 0%, 100% { opacity: .35; } 50% { opacity: .8; } }
+body { cursor: pointer; }
+
+/* ---------- Sound toggle ---------- */
+.sound {
+  position: fixed; right: 18px; bottom: 18px; z-index: 1000;
+  width: 42px; height: 42px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(248,244,236,.85); color: var(--ink);
+  border: 1px solid rgba(184,149,90,.6); cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.sound:hover, .sound:focus-visible { background: var(--deep); color: var(--paper); outline: none; }
+.sound svg { width: 20px; height: 20px; }
+.sound .cross { display: none; }
+.sound.off .wave { display: none; }
+.sound.off .cross { display: inline; }
