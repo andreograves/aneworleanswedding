@@ -158,6 +158,13 @@ h3 {
 }
 .card .time { font-style: italic; color: var(--accent); margin: 0 0 12px; }
 .card p { margin: 0; }
+.card .venue { font-weight: 500; font-size: 1.3rem; }
+.map-link {
+  display: inline-block; margin-top: 16px;
+  font-family: var(--sans); font-size: .68rem; letter-spacing: .25em; text-transform: uppercase;
+  text-decoration: none; color: var(--ink); border-bottom: 1px solid var(--accent); padding-bottom: 2px;
+}
+.map-link:hover { color: var(--accent); }
 
 .two-col {
   display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
