@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ailsa &amp; André · January 8, 2028</title>
+  <meta name="description" content="Ailsa &amp; André are getting married in New Orleans, Louisiana on January 8, 2028.">
+  <meta property="og:title" content="Ailsa &amp; André">
+  <meta property="og:description" content="New Orleans, Louisiana · January 8, 2028">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="splash.css">
+</head>
+<body>
+
+  <!-- Shared drawings -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="fdl" viewBox="0 2 100 102">
+        <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M50 6 C63 24 65 46 50 66 C35 46 37 24 50 6 Z"/>
+          <path d="M55 66 C58 48 74 36 87 41 C97 45 96 60 86 61 C79 62 77 54 82 51"/>
+          <path d="M45 66 C42 48 26 36 13 41 C3 45 4 60 14 61 C21 62 23 54 18 51"/>
+          <path d="M34 69 H66 M34 75 H66"/>
+          <path d="M50 75 C50 86 47 94 44 100 M50 75 C50 86 53 94 56 100"/>
+          <path d="M44 75 C38 84 30 88 24 88 M56 75 C62 84 70 88 76 88"/>
+        </g>
+      </symbol>
+      <symbol id="heart" viewBox="0 0 100 92">
+        <path fill="currentColor" d="M50 91 C45 79 3 57 3 29 C3 12 15 2 28.5 2 C39 2 46.5 9 50 18 C53.5 9 61 2 71.5 2 C85 2 97 12 97 29 C97 57 55 79 50 91 Z"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <main class="table" id="table" aria-label="Ailsa and André">
+    <template id="card-tpl">
+      <div class="card">
+        <div class="card-inner">
+          <div class="face back">
+            <div class="back-frame">
+              <svg class="back-fdl"><use href="#fdl"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <template id="ace-front">
+      <div class="face front">
+        <div class="corner tl"><span>A</span><svg><use href="#heart"/></svg></div>
+        <svg class="pip"><use href="#heart"/></svg>
+        <div class="corner br"><span>A</span><svg><use href="#heart"/></svg></div>
+      </div>
+    </template>
+  </main>
+
+  <a class="enter" id="enter" href="home.html">Geaux</a>
+
+  <script src="splash.js"></script>
+</body>
+</html>
