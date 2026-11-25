@@ -2,7 +2,7 @@
 
 Static wedding website (plain HTML/CSS/JS, no build step).
 
-- `index.html` — splash page (shuffling cards → ace of hearts → "Entrer")
+- `index.html` — splash page (shuffling cards → ace of hearts → "Geaux")
 - `splash.css`, `splash.js` — splash styling and card animation
 - `home.html` — main site content (edit text here)
 - `styles.css` — colors, fonts, layout (palette variables at the top)
