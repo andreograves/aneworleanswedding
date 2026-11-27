@@ -40,11 +40,11 @@ const titleCSS = (k, pos) => `
 .title .wed{top:${pos.wed}px}
 .title .wed .w{position:relative;display:inline-block}
 .title .wed span{font-family:"Pinyon Script",cursive;color:#f6f0e4;font-size:${156*k}px;line-height:1}
-.title .wed .p{position:absolute;left:100%;top:50%;margin-left:${24*k}px;width:${118*k}px;transform:translateY(-62%) rotate(16deg);filter:drop-shadow(0 8px 10px rgba(0,0,0,.35))}
+.title .wed .p{position:absolute;left:100%;top:50%;margin-left:${40*k}px;width:${118*k}px;transform:translateY(-62%) rotate(16deg);filter:drop-shadow(0 8px 10px rgba(0,0,0,.35))}
 .title .wed .p svg{display:block;width:100%;height:auto}
 .title .wed .p path[stroke="#3a2a22"]{stroke:#e6c887}`;
 const titleHTML = `<div class="wash"></div><div class="title"><div class="a">How about a</div><div class="no">New Orleans</div>
-<div class="wed"><div class="w"><span>wedding</span><div class="p">${parasolSVG(["#f3ece0", "#c9a45f", "#e6c887"])}</div></div></div></div>`;
+<div class="wed"><div class="w"><span>wedding?</span><div class="p">${parasolSVG(["#f3ece0", "#c9a45f", "#e6c887"])}</div></div></div></div>`;
 const FONTS = `<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500${SUP.gf ? "&family=" + SUP.gf : ""}&display=swap" rel="stylesheet">`;
 // Card-shaped (5:7) preview: the card back edge to edge.
 const portrait = `<!doctype html><html><head>${FONTS}<style>*{margin:0}body{width:1000px;height:1400px;overflow:hidden;position:relative;background:#efe9dd}
