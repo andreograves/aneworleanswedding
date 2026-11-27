@@ -70,6 +70,7 @@ body {
 
 /* Back: printed design (SVG #cardback) */
 .back { background: var(--card); }
+.back::before { display: none; }          /* matte: no gloss streak */
 .back-art { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 /* cards other than the ace show their back on both sides while tumbling */
 .card.plain .back { backface-visibility: visible; -webkit-backface-visibility: visible; }
