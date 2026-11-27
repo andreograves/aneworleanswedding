@@ -30,10 +30,10 @@ U.S. federal government it is in the public domain
 
 Prepared from the original with:
 ```
-ffmpeg -ss 34.5 -to 174.8 -i original.mp3 \
-  -af "afade=t=in:d=0.03,rubberband=tempo=1.2:pitchq=quality:transients=crisp:detector=compound,afade=t=out:st=116.2:d=0.6,loudnorm=I=-17:TP=-1.5:LRA=11" \
-  -ar 44100 -ac 2 -b:a 128k assets/audio/saints-brass.mp3
+ffmpeg -ss 110.098 -to 160.757 -i original.mp3 \
+  -af "rubberband=tempo=1.2:pitchq=quality:transients=crisp:detector=compound,afade=t=in:d=0.012,afade=t=out:st=42.196:d=0.02,loudnorm=I=-17:TP=-1.5:LRA=11" \
+  -ar 44100 -ac 2 -b:a 160k assets/audio/saints-brass.mp3
 ```
-(starts at the full-band entry, 20% faster with pitch unchanged, volume normalized).
+(the 1:50–2:40 instrumental section, cut on downbeats to exactly 21 bars, 20% faster with pitch unchanged, volume normalized; `splash.js` loops it gaplessly with Web Audio).
 
 Card sounds are synthesized live in the browser (`splash.js`).

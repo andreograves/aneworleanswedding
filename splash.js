@@ -12,13 +12,14 @@
   var muted = false;
   try { muted = localStorage.getItem("aa-muted") === "1"; } catch (e) {}
   var ctx = null, noise = null, master = null;
-  var MUSIC_VOL = 0.38;
+  var MUSIC_VOL = 0.4;
   var SFX_VOL = 2.2;   // card sounds level
 
   function initAudio() {
     if (ctx) return;
     var AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return;
+    try { if (navigator.audioSession) navigator.audioSession.type = "playback"; } catch (e) {}
     ctx = new AC();
     master = ctx.createGain();
     master.gain.value = muted ? 0 : SFX_VOL;
@@ -75,22 +76,63 @@
     }
   };
 
+  // ---- Music: gapless loop through Web Audio, <audio> element as fallback ----
+  var LOOP_LEN = 42.216;          // exact loop length in seconds (21 bars)
+  var musicData = null, musicBuf = null, musicGain = null, musicSrc = null, musicOn = false;
+  if (music && window.fetch) {
+    musicData = fetch(music.getAttribute("src")).then(function (r) { return r.arrayBuffer(); }).catch(function () { return null; });
+  }
+  function decodeMusic() {
+    if (!ctx || !musicData) return Promise.resolve(null);
+    return musicData.then(function (ab) {
+      if (!ab) return null;
+      return new Promise(function (res) { ctx.decodeAudioData(ab.slice(0), res, function () { res(null); }); });
+    });
+  }
+  // Decoders differ in how much silent padding they add at the start, so
+  // locate the first note and line the loop up against it.
+  var LEAD = 0.042;               // first note's offset in a padding-free decode
+  function loopStartFor(buf) {
+    var d = buf.getChannelData(0), lim = Math.min(d.length, buf.sampleRate);
+    for (var i = 0; i < lim; i++) if (Math.abs(d[i]) > 0.02) return Math.max(0, i / buf.sampleRate - LEAD);
+    return 0;
+  }
   function startMusic() {
+    if (musicOn) return;
+    musicOn = true;
+    if (ctx && musicData) {
+      musicGain = ctx.createGain();
+      musicGain.gain.value = 0;
+      musicGain.connect(ctx.destination);
+      decodeMusic().then(function (buf) {
+        if (!buf) { musicGain = null; return startFallback(); }
+        musicBuf = buf;
+        var start = loopStartFor(buf);
+        musicSrc = ctx.createBufferSource();
+        musicSrc.buffer = buf;
+        musicSrc.loop = true;
+        musicSrc.loopStart = start;
+        musicSrc.loopEnd = Math.min(buf.duration, start + LOOP_LEN);
+        musicSrc.connect(musicGain);
+        musicSrc.start(0, start);
+        fadeMusic(muted ? 0 : MUSIC_VOL, 1.2);
+      });
+    } else startFallback();
+  }
+  function startFallback() {
     if (!music) return;
-    music.volume = 0;
+    music.volume = muted ? 0 : MUSIC_VOL;
     var p = music.play();
     if (p && p.catch) p.catch(function () {});
-    fadeMusic(muted ? 0 : MUSIC_VOL, 1800);
   }
-  var fadeTimer = null;
-  function fadeMusic(to, ms, done) {
-    clearInterval(fadeTimer);
-    var from = music.volume, steps = Math.max(1, Math.round(ms / 40)), i = 0;
-    fadeTimer = setInterval(function () {
-      i++;
-      music.volume = Math.max(0, Math.min(1, from + (to - from) * (i / steps)));
-      if (i >= steps) { clearInterval(fadeTimer); if (done) done(); }
-    }, 40);
+  function fadeMusic(to, secs, done) {
+    if (musicGain) {
+      var g = musicGain.gain, t = ctx.currentTime;
+      g.cancelScheduledValues(t); g.setValueAtTime(g.value, t); g.linearRampToValueAtTime(to, t + secs);
+    } else if (music) {
+      music.volume = to;
+    }
+    if (done) setTimeout(done, secs * 1000);
   }
   function setMuted(m) {
     muted = m;
@@ -98,23 +140,22 @@
     soundBtn.setAttribute("aria-pressed", m ? "false" : "true");
     soundBtn.classList.toggle("off", m);
     if (master) master.gain.setTargetAtTime(m ? 0 : SFX_VOL, ctx.currentTime, 0.05);
-    if (music) {
-      if (!m && music.paused) startMusic();
-      else fadeMusic(m ? 0 : MUSIC_VOL, 400);
-    }
+    if (musicOn) fadeMusic(m ? 0 : MUSIC_VOL, 0.4);
   }
   soundBtn.addEventListener("click", function (e) {
     e.stopPropagation();
     initAudio();
+    if (ctx && ctx.state === "suspended") ctx.resume();
     setMuted(!muted);
+    if (!muted) startMusic();
   });
   setMuted(muted);
 
   // Fade the music out before leaving the page.
   enter.addEventListener("click", function (e) {
-    if (!music || music.paused || muted) return;
+    if (!musicOn || muted) return;
     e.preventDefault();
-    fadeMusic(0, 700, function () { location.href = enter.href; });
+    fadeMusic(0, 0.7, function () { location.href = enter.href; });
   });
 
   // ---------------- Cards ----------------
