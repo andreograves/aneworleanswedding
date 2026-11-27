@@ -36,7 +36,7 @@ const titleCSS = (k, pos) => `
 .title{position:absolute;inset:0;text-shadow:0 2px 12px rgba(0,0,0,.35)}
 .title > *{position:absolute;left:0;right:0;transform:translateY(-50%);display:flex;justify-content:center;align-items:center;text-align:center}
 .title .a{top:${pos.a}px;font-family:"Pinyon Script",cursive;color:#f6f0e4;font-size:${156*k}px;line-height:1;white-space:nowrap}
-.title .no{top:${pos.no}px;font-family:"Pinyon Script",cursive;color:#e6c887;font-size:${156*k}px;line-height:1.15;white-space:nowrap}
+.title .no{top:${pos.no}px;font-family:"Pinyon Script",cursive;color:#e6c887;font-size:${156*k}px;-webkit-text-stroke:${3.2*k}px #e6c887;paint-order:stroke fill;line-height:1.15;white-space:nowrap}
 .title .wed{top:${pos.wed}px}
 .title .wed .w{position:relative;display:inline-block}
 .title .wed span{font-family:"Pinyon Script",cursive;color:#f6f0e4;font-size:${156*k}px;line-height:1}
