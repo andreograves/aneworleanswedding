@@ -48,11 +48,11 @@ ${pos.oi ? `.title div.a,.title div.wed span{font-size:${112*k}px}
 .title div.wed .p{margin-left:${30*k}px;width:${104*k}px;transform:translateY(-58%) rotate(16deg)}
 .title .a.oi{font-family:"Pinyon Script",cursive;font-style:normal;color:#e6c887;font-size:${132*k}px;-webkit-text-stroke:${2.4*k}px #e6c887;paint-order:stroke fill;letter-spacing:0}
 .title .crossed{top:${pos.cross || 0}px;height:0}
-.title .crossed .cp{position:absolute;left:50%;top:0;width:${150*k}px;margin-left:${-75*k}px;transform-origin:50% 92%;filter:drop-shadow(0 8px 10px rgba(0,0,0,.35))}
+.title .crossed .cp{position:absolute;left:50%;top:0;width:${168*k}px;margin-left:${-84*k}px;transform-origin:50% 80%;filter:drop-shadow(0 8px 10px rgba(0,0,0,.35))}
 .title .crossed .cp svg{display:block;width:100%;height:auto}
 .title .crossed .cp path[stroke="#3a2a22"]{stroke:#e6c887}
-.title .crossed .l{transform:translate(0,-92%) rotate(-42deg)}
-.title .crossed .r{transform:translate(0,-92%) rotate(42deg)}` : ""}
+.title .crossed .l{transform:translate(0,-80%) rotate(-29deg) scaleX(-1)}
+.title .crossed .r{transform:translate(0,-80%) rotate(29deg);z-index:2}` : ""}
 .title .wed.w1{top:${pos.w1 || 0}px}
 .title .wed .w{position:relative;display:inline-block}
 .title .wed span{font-family:"Cormorant Garamond",Georgia,serif;font-weight:300;color:#f6f0e4;line-height:1;${SUPCASE}}
@@ -94,7 +94,7 @@ const titleHTML = OI
 const FONTS = `<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500${SUP.gf ? "&family=" + SUP.gf : ""}&display=swap" rel="stylesheet">`;
 // Card-shaped (5:7) preview: the card back edge to edge.
 const portrait = `<!doctype html><html><head>${FONTS}<style>*{margin:0}body{width:1000px;height:1400px;overflow:hidden;position:relative;background:#efe9dd}
-svg.art{width:100%;height:100%;display:block}${OI ? titleCSS(1, CROSSED ? {oi: 190, a: 307, no: 680, wed: 1048, cross: 1268} : {oi: 205, a: 322, no: 700, wed: 1078}) : titleCSS(1, {a: 285, no: 700, wed: 1125})}</style></head>
+svg.art{width:100%;height:100%;display:block}${OI ? titleCSS(1, CROSSED ? {oi: 185, a: 302, no: 672, wed: 1040, cross: 1246} : {oi: 205, a: 322, no: 700, wed: 1078}) : titleCSS(1, {a: 285, no: 700, wed: 1125})}</style></head>
 <body>${defs}<svg class="art" viewBox="0 0 250 350"><use href="#cardback"/></svg>${titleHTML}</body></html>`;
 (async () => {
   const browser = await chromium.launch();
