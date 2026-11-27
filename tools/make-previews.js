@@ -51,7 +51,7 @@ ${pos.oi ? `.title div.a,.title div.wed span{font-size:${112*k}px}
 .title .crossed .cp{position:absolute;left:50%;top:0;width:${168*k}px;margin-left:${-84*k}px;transform-origin:50% 80%;filter:drop-shadow(0 8px 10px rgba(0,0,0,.35))}
 .title .crossed .cp svg{display:block;width:100%;height:auto}
 .title .crossed .cp path[stroke="#3a2a22"]{stroke:#e6c887}
-.title .crossed .l{transform:translate(0,-80%) rotate(-29deg)}
+.title .crossed .l{transform:translate(0,-80%) rotate(-29deg) scaleX(-1)}
 .title .crossed .r{transform:translate(0,-80%) rotate(29deg);z-index:2}` : ""}
 .title .wed.w1{top:${pos.w1 || 0}px}
 .title .wed .w{position:relative;display:inline-block}
@@ -73,7 +73,7 @@ const star = (cx, cy, r, n) => {
   return `<polygon points="${pts.join(" ")}" fill="#f6f0e4"/>`;
 };
 // Australian flag parasol: navy canopy, Union Jack in the upper hoist, Commonwealth Star, Southern Cross.
-const ausParasol = parasolSVG(["#1f2d63", "#22336f", "#f3ece0"]).replace("M60 56 L60 118 Q60 128 51 128 Q44 128 44 121", "M60 56 L60 118 Q60 128 69 128 Q76 128 76 121").replace("</svg>", `
+const ausParasol = parasolSVG(["#1f2d63", "#22336f", "#f3ece0"]).replace("</svg>", `
 <clipPath id="ujc"><rect x="24" y="20" width="28" height="17"/></clipPath>
 <g clip-path="url(#ujc)">
   <rect x="24" y="20" width="28" height="17" fill="#1f2d63"/>
