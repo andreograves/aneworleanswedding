@@ -22,16 +22,17 @@ const splashSrc = fs.readFileSync(path.join(root, "splash.js"), "utf8");
 const parasolSrc = splashSrc.slice(splashSrc.indexOf("function parasolSVG("), splashSrc.indexOf("  function parasolShower"));
 const parasolSVG = new Function(parasolSrc + "; return parasolSVG;")();
 // Title-card previews: the card under a deep maroon wash, with the words over it.
-const titleCSS = (k) => `
+// k = font scale; pos = vertical centers (px) for each line, chosen to clear the oval medallion.
+const titleCSS = (k, pos) => `
 .wash{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(58,14,22,.66) 0%,rgba(40,9,15,.8) 100%)}
-.title{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:${88*k}px;
-  text-shadow:0 2px 12px rgba(0,0,0,.35)}
-.title .a{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;color:#f6f0e4;font-size:${96*k}px;letter-spacing:.07em;line-height:1;margin-bottom:${40*k}px}
-.title .no{font-family:"Pinyon Script",cursive;color:#e6c887;font-size:${190*k}px;line-height:1.15;white-space:nowrap}
-.title .wed{display:flex;align-items:center;justify-content:center;gap:${22*k}px}
-.title .wed span{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;color:#f6f0e4;font-size:${112*k}px;letter-spacing:.07em;
-  padding-left:.07em;text-transform:uppercase;line-height:1.1}
-.title .wed .p{width:${120*k}px;transform:rotate(16deg) translateY(${-8*k}px);filter:drop-shadow(0 8px 10px rgba(0,0,0,.35))}
+.title{position:absolute;inset:0;text-shadow:0 2px 12px rgba(0,0,0,.35)}
+.title > *{position:absolute;left:0;right:0;transform:translateY(-50%);display:flex;justify-content:center;align-items:center;text-align:center}
+.title .a{top:${pos.a}px;font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;color:#f6f0e4;font-size:${124*k}px;line-height:1}
+.title .no{top:${pos.no}px;font-family:"Pinyon Script",cursive;color:#e6c887;font-size:${190*k}px;line-height:1.15;white-space:nowrap}
+.title .wed{top:${pos.wed}px;gap:${22*k}px}
+.title .wed span{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;color:#f6f0e4;font-size:${124*k}px;letter-spacing:.07em;
+  padding-left:.07em;text-transform:uppercase;line-height:1}
+.title .wed .p{width:${132*k}px;transform:rotate(16deg) translateY(${-8*k}px);filter:drop-shadow(0 8px 10px rgba(0,0,0,.35))}
 .title .wed .p svg{display:block;width:100%;height:auto}
 .title .wed .p path[stroke="#3a2a22"]{stroke:#e6c887}`;
 const titleHTML = `<div class="wash"></div><div class="title"><div class="a">A</div><div class="no">New Orleans</div>
@@ -39,14 +40,14 @@ const titleHTML = `<div class="wash"></div><div class="title"><div class="a">A</
 const FONTS = `<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">`;
 // Card-shaped (5:7) preview: the card back edge to edge.
 const portrait = `<!doctype html><html><head>${FONTS}<style>*{margin:0}body{width:1000px;height:1400px;overflow:hidden;position:relative;background:#efe9dd}
-svg.art{width:100%;height:100%;display:block}${titleCSS(1)}</style></head>
+svg.art{width:100%;height:100%;display:block}${titleCSS(1, {a: 285, no: 700, wed: 1125})}</style></head>
 <body>${defs}<svg class="art" viewBox="0 0 250 350"><use href="#cardback"/></svg>${titleHTML}</body></html>`;
 // Square preview: the tilted card on cream, all under the wash.
 const square = `<!doctype html><html><head>${FONTS}<style>*{margin:0;box-sizing:border-box}
 body{width:1200px;height:1200px;overflow:hidden;position:relative;background:radial-gradient(ellipse at center,#6a1f2b 0%,#4a121c 60%,#2e0a11 100%)}
 .card{position:absolute;left:50%;top:50%;width:640px;height:896px;margin:-448px 0 0 -320px;border-radius:36px;overflow:hidden;transform:rotate(-4deg);
 box-shadow:0 3px 4px rgba(0,0,0,.2),0 34px 70px rgba(60,18,24,.26)}
-.card svg{width:100%;height:100%;display:block}${titleCSS(1.16)}</style></head>
+.card svg{width:100%;height:100%;display:block}${titleCSS(1.12, {a: 305, no: 600, wed: 905})}</style></head>
 <body>${defs}<div class="card"><svg viewBox="0 0 250 350"><use href="#cardback"/></svg></div>${titleHTML}</body></html>`;
 
 (async () => {
