@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//aneworleanswedding.com//Save the Date//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:ailsa-andre-wedding-20280108@aneworleanswedding.com
+DTSTAMP:20261127T000000Z
+DTSTART;VALUE=DATE:20280108
+DTEND;VALUE=DATE:20280109
+SUMMARY:Ailsa and André’s Wedding
+LOCATION:The Capulet\, 3014 Dauphine Street\, New Orleans\, LA 70117
+DESCRIPTION:Save the date! Formal invitation to follow. Details: https://aneworleanswedding.com
+URL:https://aneworleanswedding.com
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR
