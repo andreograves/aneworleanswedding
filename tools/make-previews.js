@@ -45,9 +45,14 @@ return `
 .title .wed{top:${pos.wed}px}
 .title .oi{top:${pos.oi || 0}px}
 ${pos.oi ? `.title div.a,.title div.wed span{font-size:${112*k}px}
-.title div.wed .w{display:inline-flex;align-items:center}
-.title div.wed .p{position:static;flex:none;margin-left:${30*k}px;width:${104*k}px;transform:translateY(-14%) rotate(16deg)}
-.title .a.oi{font-family:"Pinyon Script",cursive;font-style:normal;color:#e6c887;font-size:${132*k}px;-webkit-text-stroke:${2.4*k}px #e6c887;paint-order:stroke fill;letter-spacing:0}` : ""}
+.title div.wed .p{margin-left:${30*k}px;width:${104*k}px;transform:translateY(-58%) rotate(16deg)}
+.title .a.oi{font-family:"Pinyon Script",cursive;font-style:normal;color:#e6c887;font-size:${132*k}px;-webkit-text-stroke:${2.4*k}px #e6c887;paint-order:stroke fill;letter-spacing:0}
+.title .crossed{top:${pos.cross || 0}px;height:0}
+.title .crossed .cp{position:absolute;left:50%;top:0;width:${150*k}px;margin-left:${-75*k}px;transform-origin:50% 92%;filter:drop-shadow(0 8px 10px rgba(0,0,0,.35))}
+.title .crossed .cp svg{display:block;width:100%;height:auto}
+.title .crossed .cp path[stroke="#3a2a22"]{stroke:#e6c887}
+.title .crossed .l{transform:translate(0,-92%) rotate(-42deg)}
+.title .crossed .r{transform:translate(0,-92%) rotate(42deg)}` : ""}
 .title .wed.w1{top:${pos.w1 || 0}px}
 .title .wed .w{position:relative;display:inline-block}
 .title .wed span{font-family:"Cormorant Garamond",Georgia,serif;font-weight:300;color:#f6f0e4;line-height:1;${SUPCASE}}
@@ -57,16 +62,39 @@ ${pos.oi ? `.title div.a,.title div.wed span{font-size:${112*k}px}
 };
 // Live preview copy: "Oi! / How about a / New Orleans / wedding?" (COPY=short renders the earlier version)
 const OI = process.env.COPY !== "short";
-const parasolHTML = `<div class="p">${parasolSVG(["#f3ece0", "#c9a45f", "#e6c887"])}</div>`;
+const CROSSED = process.env.PARASOLS === "crossed";
+const goldParasol = parasolSVG(["#f3ece0", "#c9a45f", "#e6c887"]);
+const star = (cx, cy, r, n) => {
+  const pts = [];
+  for (let i = 0; i < n * 2; i++) {
+    const rr = i % 2 ? r * 0.42 : r, a = -Math.PI / 2 + i * Math.PI / n;
+    pts.push((cx + rr * Math.cos(a)).toFixed(2) + "," + (cy + rr * Math.sin(a)).toFixed(2));
+  }
+  return `<polygon points="${pts.join(" ")}" fill="#f6f0e4"/>`;
+};
+// Australian flag parasol: navy canopy, Union Jack in the upper hoist, Commonwealth Star, Southern Cross.
+const ausParasol = parasolSVG(["#1f2d63", "#22336f", "#f3ece0"]).replace("</svg>", `
+<clipPath id="ujc"><rect x="24" y="20" width="28" height="17"/></clipPath>
+<g clip-path="url(#ujc)">
+  <rect x="24" y="20" width="28" height="17" fill="#1f2d63"/>
+  <path d="M24 20L52 37M52 20L24 37" stroke="#f6f0e4" stroke-width="3.4"/>
+  <path d="M24 20L52 37M52 20L24 37" stroke="#c8283a" stroke-width="1.2"/>
+  <path d="M38 20V37M24 28.5H52" stroke="#f6f0e4" stroke-width="5.6"/>
+  <path d="M38 20V37M24 28.5H52" stroke="#c8283a" stroke-width="3.2"/>
+</g>
+${star(38, 46, 5, 7)}${star(80, 19, 3, 7)}${star(71, 31, 3, 7)}${star(92, 29, 3, 7)}${star(81, 43, 3, 7)}${star(87, 35, 1.7, 5)}
+</svg>`);
+const parasolHTML = CROSSED ? "" : `<div class="p">${goldParasol}</div>`;
+const crossedHTML = CROSSED ? `<div class="crossed"><div class="cp l">${goldParasol}</div><div class="cp r">${ausParasol}</div></div>` : "";
 const titleHTML = OI
   ? `<div class="wash"></div><div class="title"><div class="a oi">Oi!</div><div class="a">How about a</div><div class="no">New Orleans</div>
-<div class="wed"><div class="w"><span>wedding?</span>${parasolHTML}</div></div></div>`
+<div class="wed"><div class="w"><span>wedding?</span>${parasolHTML}</div></div>${crossedHTML}</div>`
   : `<div class="wash"></div><div class="title"><div class="a">How about a</div><div class="no">New Orleans</div>
-<div class="wed"><div class="w"><span>wedding?</span>${parasolHTML}</div></div></div>`;
+<div class="wed"><div class="w"><span>wedding?</span>${parasolHTML}</div></div>${crossedHTML}</div>`;
 const FONTS = `<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500${SUP.gf ? "&family=" + SUP.gf : ""}&display=swap" rel="stylesheet">`;
 // Card-shaped (5:7) preview: the card back edge to edge.
 const portrait = `<!doctype html><html><head>${FONTS}<style>*{margin:0}body{width:1000px;height:1400px;overflow:hidden;position:relative;background:#efe9dd}
-svg.art{width:100%;height:100%;display:block}${OI ? titleCSS(1, {oi: 170, a: 305, no: 700, wed: 1135}) : titleCSS(1, {a: 285, no: 700, wed: 1125})}</style></head>
+svg.art{width:100%;height:100%;display:block}${OI ? titleCSS(1, CROSSED ? {oi: 190, a: 307, no: 680, wed: 1048, cross: 1268} : {oi: 205, a: 322, no: 700, wed: 1078}) : titleCSS(1, {a: 285, no: 700, wed: 1125})}</style></head>
 <body>${defs}<svg class="art" viewBox="0 0 250 350"><use href="#cardback"/></svg>${titleHTML}</body></html>`;
 (async () => {
   const browser = await chromium.launch();
