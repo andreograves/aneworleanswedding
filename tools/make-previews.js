@@ -27,7 +27,7 @@ const titleCSS = (k, pos) => `
 .wash{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(58,14,22,.66) 0%,rgba(40,9,15,.8) 100%)}
 .title{position:absolute;inset:0;text-shadow:0 2px 12px rgba(0,0,0,.35)}
 .title > *{position:absolute;left:0;right:0;transform:translateY(-50%);display:flex;justify-content:center;align-items:center;text-align:center}
-.title .a{top:${pos.a}px;font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;color:#f6f0e4;font-size:${124*k}px;line-height:1}
+.title .a{top:${pos.a}px;font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;color:#f6f0e4;font-size:${92*k}px;letter-spacing:.07em;padding-left:.07em;text-transform:uppercase;line-height:1;white-space:nowrap}
 .title .no{top:${pos.no}px;font-family:"Pinyon Script",cursive;color:#e6c887;font-size:${190*k}px;line-height:1.15;white-space:nowrap}
 .title .wed{top:${pos.wed}px;gap:${22*k}px}
 .title .wed span{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;color:#f6f0e4;font-size:${124*k}px;letter-spacing:.07em;
@@ -35,7 +35,7 @@ const titleCSS = (k, pos) => `
 .title .wed .p{width:${132*k}px;transform:rotate(16deg) translateY(${-8*k}px);filter:drop-shadow(0 8px 10px rgba(0,0,0,.35))}
 .title .wed .p svg{display:block;width:100%;height:auto}
 .title .wed .p path[stroke="#3a2a22"]{stroke:#e6c887}`;
-const titleHTML = `<div class="wash"></div><div class="title"><div class="a">A</div><div class="no">New Orleans</div>
+const titleHTML = `<div class="wash"></div><div class="title"><div class="a">How about a</div><div class="no">New Orleans</div>
 <div class="wed"><span>Wedding</span><div class="p">${parasolSVG(["#f3ece0", "#c9a45f", "#e6c887"])}</div></div></div>`;
 const FONTS = `<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">`;
 // Card-shaped (5:7) preview: the card back edge to edge.
