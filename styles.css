@@ -147,7 +147,8 @@ a { color: inherit; }
   font-family: var(--sans); font-size: .7rem; letter-spacing: .25em;
   text-transform: uppercase; color: var(--muted);
 }
-.photo img { width: 100%; height: 100%; object-fit: cover; }
+.photo { margin: 0; overflow: hidden; }
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .cards {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
@@ -221,7 +222,7 @@ h3 {
   .two-col { gap: 0; text-align: center; }
   .two-col > div + div { margin-top: 24px; }
   .photo-row { grid-template-columns: 1fr 1fr; }
-  .photo-row .photo:last-child { display: none; }
+  .photo-row .photo:first-child { display: none; }
 }
 .section-title .fdl-mark {
   width: .62em; height: .66em; margin: 0 .38em; vertical-align: -.02em;
