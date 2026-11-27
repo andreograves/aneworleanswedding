@@ -31,11 +31,11 @@ const SUP = {
   scale: parseFloat(process.env.SUP_SCALE || "1"),
   gf: process.env.SUP_GF || "",
 };
-const CAPS = (process.env.SUP_CASE || "caps") === "caps";
+const CAPS = (process.env.SUP_CASE || "sentence") === "caps";
 const titleCSS = (k, pos) => {
 const SUPCASE = CAPS
   ? `text-transform:uppercase;letter-spacing:.14em;padding-left:.14em;font-size:${86*k}px`
-  : `letter-spacing:.02em;font-size:${132*k}px`;
+  : `font-style:italic;letter-spacing:.02em;font-size:${132*k}px`;
 return `
 .wash{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(58,14,22,.66) 0%,rgba(40,9,15,.8) 100%)}
 .title{position:absolute;inset:0;text-shadow:0 2px 12px rgba(0,0,0,.35)}
@@ -51,7 +51,7 @@ return `
 };
 const titleHTML = `<div class="wash"></div><div class="title"><div class="a">How about a</div><div class="no">New Orleans</div>
 <div class="wed"><div class="w"><span>wedding?</span><div class="p">${parasolSVG(["#f3ece0", "#c9a45f", "#e6c887"])}</div></div></div></div>`;
-const FONTS = `<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500${SUP.gf ? "&family=" + SUP.gf : ""}&display=swap" rel="stylesheet">`;
+const FONTS = `<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500${SUP.gf ? "&family=" + SUP.gf : ""}&display=swap" rel="stylesheet">`;
 // Card-shaped (5:7) preview: the card back edge to edge.
 const portrait = `<!doctype html><html><head>${FONTS}<style>*{margin:0}body{width:1000px;height:1400px;overflow:hidden;position:relative;background:#efe9dd}
 svg.art{width:100%;height:100%;display:block}${titleCSS(1, {a: 285, no: 700, wed: 1125})}</style></head>
