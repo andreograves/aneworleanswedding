@@ -9,6 +9,8 @@ Static wedding website (plain HTML/CSS/JS, no build step).
 - `script.js` — countdown + mobile menu
 - `assets/fleur-de-lis.svg` — the minimalist fleur-de-lis emblem
 - `CNAME` — custom domain for GitHub Pages
+- `assets/og-image.jpg`, `apple-touch-icon.png`, `assets/icon-512.png` — link preview and home-screen icons,
+  rendered from the site's own artwork by `node tools/make-previews.js` (layout in `tools/preview.html`)
 
 ## Preview locally
 Open `index.html` in a browser, or run `python3 -m http.server` and visit http://localhost:8000.
