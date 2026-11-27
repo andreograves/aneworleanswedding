@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Link preview source</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#f8f4ec; --ink:#2f3a33; --gold:#b8955a; --line:rgba(168,133,74,.5); --red:#c9252c; --card:#efe9dd; }
+  * { box-sizing: border-box; margin: 0; }
+  body { width: 1200px; height: 630px; overflow: hidden;
+    background: radial-gradient(ellipse at 60% 50%, #fbf8f2 0%, var(--paper) 55%, #efe6d6 100%);
+    font-family: "Cormorant Garamond", Georgia, serif; color: var(--ink); position: relative; }
+  .frame { position: absolute; inset: 26px; border: 1px solid var(--line); outline: 1px solid var(--line); outline-offset: -9px; }
+  .card { position: absolute; width: 250px; height: 350px; border-radius: 13px; overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0,0,0,.2), 0 14px 32px rgba(60,18,24,.22); }
+  .card svg.art { width: 100%; height: 100%; display: block; }
+  .card::after { content: ""; position: absolute; inset: 0; opacity: .3; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .back { left: 108px; top: 146px; transform: rotate(-11deg); }
+  .ace { left: 236px; top: 128px; transform: rotate(7deg); background: var(--card); color: var(--red); }
+  .ace::after { opacity: .08; }
+  .corner { position: absolute; display: flex; flex-direction: column; align-items: center; line-height: .9; }
+  .corner span { font-family: "Playfair Display", Georgia, serif; font-weight: 700; font-size: 40px; }
+  .corner svg { width: 19px; height: 18px; margin-top: 5px; }
+  .tl { top: 21px; left: 18px; } .br { bottom: 21px; right: 18px; transform: rotate(180deg); }
+  .pip { position: absolute; left: 50%; top: 50%; width: 54px; height: 50px; transform: translate(-50%,-50%); }
+  .text { position: absolute; left: 600px; right: 60px; top: 0; bottom: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center; }
+  .eyebrow { font-family: Montserrat, sans-serif; font-size: 15px; letter-spacing: .38em; text-transform: uppercase; color: #6c6f66; margin-bottom: 22px; }
+  .name { font-weight: 300; font-size: 92px; letter-spacing: .1em; text-transform: uppercase; line-height: 1; padding-left: .1em; }
+  .emblem { display: flex; align-items: center; gap: 22px; margin: 18px 0 14px; color: var(--gold); }
+  .emblem .rule { width: 110px; height: 1px; background: var(--line); }
+  .emblem svg { width: 58px; height: 60px; --fdl-stroke: 2; }
+  .date { font-family: Montserrat, sans-serif; font-size: 20px; letter-spacing: .34em; margin-top: 34px; padding-left: .34em; }
+  .place { font-style: italic; font-size: 28px; color: #6c6f66; margin-top: 8px; }
+</style>
+</head>
+<body>
+<!--DEFS-->
+<div class="frame"></div>
+<div class="card back"><svg class="art" viewBox="0 0 250 350"><use href="#cardback"/></svg></div>
+<div class="card ace">
+  <div class="corner tl"><span>A</span><svg viewBox="0 0 100 92"><use href="#heart"/></svg></div>
+  <svg class="pip" viewBox="0 0 100 92"><use href="#heart"/></svg>
+  <div class="corner br"><span>A</span><svg viewBox="0 0 100 92"><use href="#heart"/></svg></div>
+</div>
+<div class="text">
+  <p class="eyebrow">The wedding of</p>
+  <p class="name">Ailsa</p>
+  <div class="emblem"><span class="rule"></span><svg viewBox="0 2 100 102"><use href="#fdl"/></svg><span class="rule"></span></div>
+  <p class="name">André</p>
+  <p class="date">JANUARY 8, 2028</p>
+  <p class="place">New Orleans, Louisiana</p>
+</div>
+</body>
+</html>
