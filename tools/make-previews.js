@@ -26,12 +26,12 @@ const titleCSS = (k) => `
 .wash{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(58,14,22,.66) 0%,rgba(40,9,15,.8) 100%)}
 .title{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
   text-shadow:0 2px 12px rgba(0,0,0,.35)}
-.title .a{font-family:"Pinyon Script",cursive;color:#e6c887;font-size:${150*k}px;line-height:.85}
-.title .no{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;color:#f6f0e4;font-size:${112*k}px;letter-spacing:.07em;
-  padding-left:.07em;text-transform:uppercase;line-height:1.1;white-space:nowrap}
-.title .wed{display:flex;align-items:center;justify-content:center;gap:${18*k}px;margin-top:${4*k}px}
-.title .wed span{font-family:"Pinyon Script",cursive;color:#e6c887;font-size:${220*k}px;line-height:1.05}
-.title .wed .p{width:${150*k}px;transform:rotate(16deg) translateY(${-6*k}px);filter:drop-shadow(0 8px 10px rgba(0,0,0,.35))}
+.title .a{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;color:#f6f0e4;font-size:${96*k}px;letter-spacing:.07em;line-height:1}
+.title .no{font-family:"Pinyon Script",cursive;color:#e6c887;font-size:${190*k}px;line-height:1.15;white-space:nowrap;margin:${-6*k}px 0 ${-10*k}px}
+.title .wed{display:flex;align-items:center;justify-content:center;gap:${22*k}px}
+.title .wed span{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;color:#f6f0e4;font-size:${112*k}px;letter-spacing:.07em;
+  padding-left:.07em;text-transform:uppercase;line-height:1.1}
+.title .wed .p{width:${120*k}px;transform:rotate(16deg) translateY(${-8*k}px);filter:drop-shadow(0 8px 10px rgba(0,0,0,.35))}
 .title .wed .p svg{display:block;width:100%;height:auto}
 .title .wed .p path[stroke="#3a2a22"]{stroke:#e6c887}`;
 const titleHTML = `<div class="wash"></div><div class="title"><div class="a">A</div><div class="no">New Orleans</div>
