@@ -31,9 +31,9 @@ U.S. federal government it is in the public domain
 Prepared from the original with:
 ```
 ffmpeg -ss 110.098 -to 160.757 -i original.mp3 \
-  -af "rubberband=tempo=1.2:pitchq=quality:transients=crisp:detector=compound,afade=t=in:d=0.012,afade=t=out:st=42.196:d=0.02,loudnorm=I=-17:TP=-1.5:LRA=11" \
+  -af "rubberband=tempo=0.70359:pitchq=quality:transients=crisp:detector=compound,afade=t=in:d=0.012,afade=t=out:st=71.981:d=0.02,loudnorm=I=-17:TP=-1.5:LRA=11" \
   -ar 44100 -ac 2 -b:a 160k assets/audio/saints-brass.mp3
 ```
-(the 1:50–2:40 instrumental section, cut on downbeats to exactly 21 bars, 20% faster with pitch unchanged, volume normalized; `splash.js` loops it gaplessly with Web Audio).
+(the 1:50–2:40 instrumental section, cut on downbeats to exactly 21 bars, slowed to 70 bpm (from 99.5) with pitch unchanged, volume normalized; `splash.js` loops it gaplessly with Web Audio).
 
 Card sounds are synthesized live in the browser (`splash.js`).

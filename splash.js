@@ -77,7 +77,7 @@
   };
 
   // ---- Music: gapless loop through Web Audio, <audio> element as fallback ----
-  var LOOP_LEN = 42.216;          // exact loop length in seconds (21 bars)
+  var LOOP_LEN = 72.001;          // exact loop length in seconds (21 bars at 70 bpm)
   var musicData = null, musicBuf = null, musicGain = null, musicSrc = null, musicOn = false;
   if (music && window.fetch) {
     musicData = fetch(music.getAttribute("src")).then(function (r) { return r.arrayBuffer(); }).catch(function () { return null; });
@@ -91,7 +91,7 @@
   }
   // Decoders differ in how much silent padding they add at the start, so
   // locate the first note and line the loop up against it.
-  var LEAD = 0.042;               // first note's offset in a padding-free decode
+  var LEAD = 0.0406;              // first note's offset in a padding-free decode
   function loopStartFor(buf) {
     var d = buf.getChannelData(0), lim = Math.min(d.length, buf.sampleRate);
     for (var i = 0; i < lim; i++) if (Math.abs(d[i]) > 0.02) return Math.max(0, i / buf.sampleRate - LEAD);
