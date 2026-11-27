@@ -43,18 +43,30 @@ return `
 .title .a{top:${pos.a}px;font-family:"Cormorant Garamond",Georgia,serif;font-weight:300;color:#f6f0e4;line-height:1;white-space:nowrap;${SUPCASE}}
 .title .no{top:${pos.no}px;font-family:"Pinyon Script",cursive;color:#e6c887;font-size:${156*k}px;-webkit-text-stroke:${3.2*k}px #e6c887;paint-order:stroke fill;line-height:1.15;white-space:nowrap}
 .title .wed{top:${pos.wed}px}
+.title .oi{top:${pos.oi || 0}px}
+${pos.oi ? `.title div.a,.title div.wed span{font-size:${112*k}px}
+.title div.wed .w{display:inline-flex;align-items:center}
+.title div.wed .p{position:static;flex:none;margin-left:${30*k}px;width:${104*k}px;transform:translateY(-14%) rotate(16deg)}
+.title .a.oi{font-family:"Pinyon Script",cursive;font-style:normal;color:#e6c887;font-size:${132*k}px;-webkit-text-stroke:${2.4*k}px #e6c887;paint-order:stroke fill;letter-spacing:0}` : ""}
+.title .wed.w1{top:${pos.w1 || 0}px}
 .title .wed .w{position:relative;display:inline-block}
 .title .wed span{font-family:"Cormorant Garamond",Georgia,serif;font-weight:300;color:#f6f0e4;line-height:1;${SUPCASE}}
 .title .wed .p{position:absolute;left:100%;top:50%;margin-left:${40*k}px;width:${118*k}px;transform:translateY(-62%) rotate(16deg);filter:drop-shadow(0 8px 10px rgba(0,0,0,.35))}
 .title .wed .p svg{display:block;width:100%;height:auto}
 .title .wed .p path[stroke="#3a2a22"]{stroke:#e6c887}`;
 };
-const titleHTML = `<div class="wash"></div><div class="title"><div class="a">How about a</div><div class="no">New Orleans</div>
-<div class="wed"><div class="w"><span>wedding?</span><div class="p">${parasolSVG(["#f3ece0", "#c9a45f", "#e6c887"])}</div></div></div></div>`;
+// Live preview copy: "Oi! / How about a / New Orleans / wedding, love?" (COPY=short renders the earlier version)
+const OI = process.env.COPY !== "short";
+const parasolHTML = `<div class="p">${parasolSVG(["#f3ece0", "#c9a45f", "#e6c887"])}</div>`;
+const titleHTML = OI
+  ? `<div class="wash"></div><div class="title"><div class="a oi">Oi!</div><div class="a">How about a</div><div class="no">New Orleans</div>
+<div class="wed"><div class="w"><span>wedding, love?</span>${parasolHTML}</div></div></div>`
+  : `<div class="wash"></div><div class="title"><div class="a">How about a</div><div class="no">New Orleans</div>
+<div class="wed"><div class="w"><span>wedding?</span>${parasolHTML}</div></div></div>`;
 const FONTS = `<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500${SUP.gf ? "&family=" + SUP.gf : ""}&display=swap" rel="stylesheet">`;
 // Card-shaped (5:7) preview: the card back edge to edge.
 const portrait = `<!doctype html><html><head>${FONTS}<style>*{margin:0}body{width:1000px;height:1400px;overflow:hidden;position:relative;background:#efe9dd}
-svg.art{width:100%;height:100%;display:block}${titleCSS(1, {a: 285, no: 700, wed: 1125})}</style></head>
+svg.art{width:100%;height:100%;display:block}${OI ? titleCSS(1, {oi: 170, a: 305, no: 700, wed: 1135}) : titleCSS(1, {a: 285, no: 700, wed: 1125})}</style></head>
 <body>${defs}<svg class="art" viewBox="0 0 250 350"><use href="#cardback"/></svg>${titleHTML}</body></html>`;
 (async () => {
   const browser = await chromium.launch();
