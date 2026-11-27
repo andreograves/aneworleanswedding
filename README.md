@@ -10,6 +10,7 @@ Static wedding website (plain HTML/CSS/JS, no build step).
 - `assets/fleur-de-lis.svg` — the minimalist fleur-de-lis emblem
 - `CNAME` — custom domain for GitHub Pages
 - `assets/photos/` — couple photos (resized, metadata stripped)
+- `assets/save-the-date.ics` — calendar file for the "Add to Calendar" buttons (all-day, Jan 8 2028, The Capulet)
 - `assets/og-image.jpg` (photo link preview), `assets/og-image-cards.jpg` (cards version), `apple-touch-icon.png`, `assets/icon-512.png` — link previews and home-screen icons,
   rendered by `node tools/make-previews.js` (layouts in `tools/preview-photo.html` and `tools/preview.html`)
 
