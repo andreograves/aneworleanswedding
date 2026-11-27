@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="splash.css?v=20261125b">
+  <link rel="stylesheet" href="splash.css?v=20261127a">
 </head>
 <body>
 
@@ -31,6 +31,51 @@
       <symbol id="heart" viewBox="0 0 100 92">
         <path fill="currentColor" d="M50 91 C45 79 3 57 3 29 C3 12 15 2 28.5 2 C39 2 46.5 9 50 18 C53.5 9 61 2 71.5 2 C85 2 97 12 97 29 C97 57 55 79 50 91 Z"/>
       </symbol>
+      <!-- Card back: printed maroon panel, gold lattice, foil frame, medallion -->
+      <linearGradient id="foil" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#e6c887"/>
+        <stop offset=".35" stop-color="#b8904a"/>
+        <stop offset=".55" stop-color="#f0d699"/>
+        <stop offset=".8" stop-color="#a98140"/>
+        <stop offset="1" stop-color="#dcbb78"/>
+      </linearGradient>
+      <radialGradient id="panelShade" cx="50%" cy="50%" r="72%">
+        <stop offset="0" stop-color="#fff" stop-opacity=".07"/>
+        <stop offset=".55" stop-color="#000" stop-opacity="0"/>
+        <stop offset="1" stop-color="#000" stop-opacity=".32"/>
+      </radialGradient>
+      <pattern id="lattice" width="12" height="12" patternUnits="userSpaceOnUse">
+        <rect width="12" height="12" fill="#5c1a24"/>
+        <path d="M6 0L12 6L6 12L0 6Z" fill="none" stroke="#d2ad66" stroke-opacity=".5" stroke-width=".45"/>
+        <path d="M6 3.2L8.8 6L6 8.8L3.2 6Z" fill="#6c222e" stroke="#d2ad66" stroke-opacity=".35" stroke-width=".3"/>
+        <circle cx="6" cy="6" r=".65" fill="#e0bf7c"/>
+        <circle cx="0" cy="0" r=".55" fill="#d2ad66" fill-opacity=".75"/>
+        <circle cx="12" cy="0" r=".55" fill="#d2ad66" fill-opacity=".75"/>
+        <circle cx="0" cy="12" r=".55" fill="#d2ad66" fill-opacity=".75"/>
+        <circle cx="12" cy="12" r=".55" fill="#d2ad66" fill-opacity=".75"/>
+      </pattern>
+      <symbol id="rosette" viewBox="-6 -6 12 12" overflow="visible">
+        <path d="M0 -5.2L5.2 0L0 5.2L-5.2 0Z" fill="#5c1a24" stroke="url(#foil)" stroke-width=".8"/>
+        <path d="M0 -2.6L2.6 0L0 2.6L-2.6 0Z" fill="none" stroke="#d2ad66" stroke-width=".45"/>
+        <circle r=".9" fill="#e6c887"/>
+      </symbol>
+      <symbol id="cardback" viewBox="0 0 250 350">
+        <rect width="250" height="350" fill="#efe9dd"/>
+        <rect x="12" y="12" width="226" height="326" rx="7" fill="#5c1a24"/>
+        <rect x="25" y="25" width="200" height="300" fill="url(#lattice)"/>
+        <rect x="12" y="12" width="226" height="326" rx="7" fill="url(#panelShade)"/>
+        <rect x="16.5" y="16.5" width="217" height="317" rx="4.5" fill="none" stroke="url(#foil)" stroke-width="1.5"/>
+        <rect x="21.5" y="21.5" width="207" height="307" rx="2" fill="none" stroke="#d2ad66" stroke-width=".6"/>
+        <rect x="25" y="25" width="200" height="300" fill="none" stroke="#d2ad66" stroke-opacity=".6" stroke-width=".4"/>
+        <use href="#rosette" x="15" y="15" width="12" height="12"/>
+        <use href="#rosette" x="223" y="15" width="12" height="12"/>
+        <use href="#rosette" x="15" y="323" width="12" height="12"/>
+        <use href="#rosette" x="223" y="323" width="12" height="12"/>
+        <ellipse cx="125" cy="175" rx="58" ry="78" fill="none" stroke="#d2ad66" stroke-width=".6" stroke-dasharray=".6 2.4" stroke-linecap="round"/>
+        <ellipse cx="125" cy="175" rx="52" ry="71" fill="#5c1a24" stroke="url(#foil)" stroke-width="1.6"/>
+        <ellipse cx="125" cy="175" rx="46.5" ry="65.5" fill="none" stroke="#d2ad66" stroke-width=".55"/>
+        <use href="#fdl" x="90" y="138" width="70" height="72" style="color:#ddbb76"/>
+      </symbol>
     </defs>
   </svg>
 
@@ -39,9 +84,7 @@
       <div class="card">
         <div class="card-inner">
           <div class="face back">
-            <div class="back-frame">
-              <svg class="back-fdl"><use href="#fdl"/></svg>
-            </div>
+            <svg class="back-art" viewBox="0 0 250 350" preserveAspectRatio="none" aria-hidden="true"><use href="#cardback"/></svg>
           </div>
         </div>
       </div>
@@ -70,6 +113,6 @@
   <!-- "When the Saints Go Marching In" — traditional, public domain; original arrangement -->
   <audio id="music" src="assets/audio/saints.mp3?v=20261125b" preload="auto" loop></audio>
 
-  <script src="splash.js?v=20261125c"></script>
+  <script src="splash.js?v=20261127a"></script>
 </body>
 </html>
