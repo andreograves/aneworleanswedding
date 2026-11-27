@@ -146,3 +146,9 @@ body { cursor: pointer; }
 .sound .cross { display: none; }
 .sound.off .wave { display: none; }
 .sound.off .cross { display: inline; }
+
+/* ---------- Second-line parasols ---------- */
+.parasols { position: fixed; inset: 0; overflow: hidden; pointer-events: none; }
+.parasol { position: absolute; left: 0; top: 0; will-change: transform; }
+.parasol svg { display: block; width: 100%; height: auto; transform-origin: 50% 40%;
+  filter: drop-shadow(0 6px 8px rgba(60,18,24,.18)); }

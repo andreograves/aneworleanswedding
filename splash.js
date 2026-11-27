@@ -379,10 +379,87 @@
       return anim(ace, [{ s: t.s * 1.02, offset: 0.4 }, { s: t.s }], { duration: 260, easing: "ease-out" });
     });
   }
+  // ---------------- Second-line parasols ----------------
+  var PARASOL_SCHEMES = [
+    ["#5c1a24", "#c9a45f", "#e6c887"],   // maroon / gold
+    ["#f3ece0", "#5c1a24", "#c9a45f"],   // cream / maroon
+    ["#23312a", "#c9a45f", "#e6c887"],   // deep green / gold
+    ["#c9a45f", "#f3ece0", "#5c1a24"],   // gold / cream
+    ["#b5262d", "#f3ece0", "#e6c887"],   // red / cream
+    ["#4b2a5e", "#c9a45f", "#e6c887"]    // Mardi Gras purple / gold
+  ];
+  function parasolSVG(scheme) {
+    var a = scheme[0], b = scheme[1], trim = scheme[2];
+    var xs = [6, 24, 42, 60, 78, 96, 114], top = 60, ty = 6, by = 54, panels = "", fringe = "";
+    function rib(x) { return (top + (x - top) * 0.55).toFixed(1) + " " + ty + ", " + x + " 22, " + x + " " + by; }
+    function ribBack(x) { return x + " 22, " + (top + (x - top) * 0.55).toFixed(1) + " " + ty + ", " + top + " " + ty; }
+    for (var i = 0; i < xs.length - 1; i++) {
+      var x1 = xs[i], x2 = xs[i + 1], mid = (x1 + x2) / 2;
+      panels += '<path d="M' + top + " " + ty + " C" + rib(x1) + " Q" + mid + " 64 " + x2 + " " + by +
+        " C" + ribBack(x2) + 'Z" fill="' + (i % 2 ? b : a) + '"/>';
+      for (var f = x1 + 2; f < x2; f += 3.2) {
+        var dy = 6 * (1 - Math.pow((f - mid) / ((x2 - x1) / 2), 2));   // follows the scallop
+        fringe += '<line x1="' + f.toFixed(1) + '" y1="' + (by + dy - 1).toFixed(1) + '" x2="' + f.toFixed(1) + '" y2="' + (by + dy + 7).toFixed(1) + '"/>';
+      }
+    }
+    var scallops = "M6 " + by;
+    for (var k = 0; k < xs.length - 1; k++) scallops += " Q" + (xs[k] + xs[k + 1]) / 2 + " 64 " + xs[k + 1] + " " + by;
+    var ribs = "";
+    for (var r = 1; r < xs.length - 1; r++) ribs += '<path d="M' + top + " " + ty + " C" + rib(xs[r]) + '"/>';
+    return '<svg viewBox="0 0 120 132" aria-hidden="true">' +
+      '<path d="M60 56 L60 118 Q60 128 51 128 Q44 128 44 121" fill="none" stroke="#3a2a22" stroke-width="2.6" stroke-linecap="round"/>' +
+      panels +
+      '<g fill="none" stroke="' + trim + '" stroke-width=".8" opacity=".85">' + ribs + "</g>" +
+      '<path d="' + scallops + '" fill="none" stroke="' + trim + '" stroke-width="1.6"/>' +
+      '<g stroke="' + trim + '" stroke-width="1.1" stroke-linecap="round" opacity=".9">' + fringe + "</g>" +
+      '<path d="M60 ' + ty + ' L60 0" stroke="' + trim + '" stroke-width="2" stroke-linecap="round"/>' +
+      '<circle cx="60" cy="0.5" r="2.6" fill="' + trim + '"/>' +
+      "</svg>";
+  }
+  function parasolShower() {
+    var layer = document.createElement("div");
+    layer.className = "parasols";
+    document.body.insertBefore(layer, table);   // behind the ace and the link
+    var H = innerHeight, W = innerWidth, count = W < 600 ? 11 : 16, done = 0;
+    // shuffled columns so they don't sweep across in order
+    var slots = [];
+    for (var q = 0; q < count; q++) slots.push(q);
+    for (var q2 = count - 1; q2 > 0; q2--) { var r2 = Math.floor(Math.random() * (q2 + 1)); var tmp = slots[q2]; slots[q2] = slots[r2]; slots[r2] = tmp; }
+    for (var i = 0; i < count; i++) (function (i) {
+      var depth = Math.random();                        // 0 = far, 1 = near
+      var size = 46 + depth * 70;
+      var el = document.createElement("div");
+      el.className = "parasol";
+      el.style.width = size + "px";
+      el.style.opacity = (0.55 + depth * 0.45).toFixed(2);
+      el.innerHTML = parasolSVG(PARASOL_SCHEMES[i % PARASOL_SCHEMES.length]);
+      layer.appendChild(el);
+      // spread across the width, avoiding exact repeats
+      var x = ((slots[i] + 0.5) / count) * W + rand(-W / count / 2, W / count / 2) - size / 2;
+      var amp = rand(18, 48), steps = 6, kf = [];
+      for (var k = 0; k <= steps; k++) {
+        var yy = -size * 1.4 + (H + size * 2.8) * (k / steps);
+        var xx = x + Math.sin(k * 1.3 + i) * amp;
+        kf.push({ transform: "translate(" + xx.toFixed(1) + "px," + yy.toFixed(1) + "px)" });
+      }
+      var dur = (9000 - depth * 3200) * rand(0.9, 1.1);  // near ones fall faster
+      var delay = i * rand(170, 320) + rand(0, 200);
+      el.animate(kf, { duration: dur, delay: delay, easing: "linear", fill: "both" }).finished.then(function () {
+        el.remove();
+        if (++done === count) layer.remove();
+      });
+      var tilt = rand(14, 26);
+      el.firstChild.animate(
+        [{ transform: "rotate(" + (-tilt) + "deg)" }, { transform: "rotate(" + tilt + "deg)" }],
+        { duration: rand(1500, 2400), direction: "alternate", iterations: Infinity, easing: "ease-in-out", delay: -rand(0, 1500) });
+    })(i);
+  }
+
   function finish() {
     ace.inner.style.transform = "rotateY(180deg)";
     ace.el.style.willChange = "auto";
     enter.classList.add("show");
+    if (!reduced) setTimeout(parasolShower, 250);
   }
 
   // ---------------- Run ----------------
