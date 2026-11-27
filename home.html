@@ -25,8 +25,8 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Pinyon+Script&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261127k">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Pinyon+Script&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20261127n">
 </head>
 <body>
 
@@ -42,6 +42,10 @@
           <path d="M44 75 C38 84 30 88 24 88 M56 75 C62 84 70 88 76 88"/>
         </g>
       </symbol>
+      <symbol id="s-heart" viewBox="0 0 100 92"><path fill="currentColor" d="M50 91 C45 79 3 57 3 29 C3 12 15 2 28.5 2 C39 2 46.5 9 50 18 C53.5 9 61 2 71.5 2 C85 2 97 12 97 29 C97 57 55 79 50 91 Z"/></symbol>
+      <symbol id="s-diamond" viewBox="0 0 100 100"><path fill="currentColor" d="M50 2 L86 50 L50 98 L14 50 Z"/></symbol>
+      <symbol id="s-spade" viewBox="0 0 100 100"><path fill="currentColor" d="M50 3 C55 16 96 38 96 62 C96 78 84 86 72 86 C63 86 56 81 53 75 C54 84 57 92 65 98 L35 98 C43 92 46 84 47 75 C44 81 37 86 28 86 C16 86 4 78 4 62 C4 38 45 16 50 3 Z"/></symbol>
+      <symbol id="s-club" viewBox="0 0 100 100"><g fill="currentColor"><circle cx="50" cy="27" r="21"/><circle cx="26" cy="58" r="21"/><circle cx="74" cy="58" r="21"/><path d="M44 50 C44 76 40 88 32 98 L68 98 C60 88 56 76 56 50 Z"/></g></symbol>
     </defs>
   </svg>
 
@@ -97,6 +101,11 @@
 
     <!-- DETAILS -->
     <section id="details" class="section section-alt">
+      <div class="deco-card deco-right red" aria-hidden="true">
+        <span class="idx tl"><b>A</b><svg viewBox="0 0 100 92"><use href="#s-heart"/></svg></span>
+        <span class="pip"><svg viewBox="0 0 100 92"><use href="#s-heart"/></svg></span>
+        <span class="idx br"><b>A</b><svg viewBox="0 0 100 92"><use href="#s-heart"/></svg></span>
+      </div>
       <h2 class="section-title">The Details</h2>
       <div class="divider" aria-hidden="true"><img src="assets/fleur-de-lis.svg" alt=""></div>
       <p class="lede">Saturday, the eighth of January<br>two thousand twenty-eight</p>
@@ -117,6 +126,11 @@
 
     <!-- TRAVEL -->
     <section id="travel" class="section">
+      <div class="deco-card deco-left red" aria-hidden="true">
+        <span class="idx tl"><b>A</b><svg viewBox="0 0 100 100"><use href="#s-diamond"/></svg></span>
+        <span class="pip"><svg viewBox="0 0 100 100"><use href="#s-diamond"/></svg></span>
+        <span class="idx br"><b>A</b><svg viewBox="0 0 100 100"><use href="#s-diamond"/></svg></span>
+      </div>
       <h2 class="section-title">Travel<svg class="fdl-mark" aria-hidden="true"><use href="#fdl"/></svg><span class="visually-hidden">and</span>Stay</h2>
       <div class="divider" aria-hidden="true"><img src="assets/fleur-de-lis.svg" alt=""></div>
       <div class="two-col">
@@ -137,6 +151,11 @@
 
     <!-- REGISTRY -->
     <section id="registry" class="section section-alt">
+      <div class="deco-card deco-right black" aria-hidden="true">
+        <span class="idx tl"><b>A</b><svg viewBox="0 0 100 100"><use href="#s-club"/></svg></span>
+        <span class="pip"><svg viewBox="0 0 100 100"><use href="#s-club"/></svg></span>
+        <span class="idx br"><b>A</b><svg viewBox="0 0 100 100"><use href="#s-club"/></svg></span>
+      </div>
       <h2 class="section-title">Registry</h2>
       <div class="divider" aria-hidden="true"><img src="assets/fleur-de-lis.svg" alt=""></div>
       <div class="prose">
@@ -147,6 +166,11 @@
 
     <!-- FAQ -->
     <section id="faq" class="section">
+      <div class="deco-card deco-left black" aria-hidden="true">
+        <span class="idx tl"><b>A</b><svg viewBox="0 0 100 100"><use href="#s-spade"/></svg></span>
+        <span class="pip"><svg viewBox="0 0 100 100"><use href="#s-spade"/></svg></span>
+        <span class="idx br"><b>A</b><svg viewBox="0 0 100 100"><use href="#s-spade"/></svg></span>
+      </div>
       <h2 class="section-title">Questions</h2>
       <div class="divider" aria-hidden="true"><img src="assets/fleur-de-lis.svg" alt=""></div>
       <div class="faq">
@@ -175,6 +199,11 @@
 
     <!-- SAVE THE DATE -->
     <section id="save-the-date" class="section section-dark">
+      <div class="deco-card deco-right red" aria-hidden="true">
+        <span class="idx tl"><b>2</b><svg viewBox="0 0 100 92"><use href="#s-heart"/></svg></span>
+        <span class="pip pip-top"><svg viewBox="0 0 100 92"><use href="#s-heart"/></svg></span><span class="pip pip-bot"><svg viewBox="0 0 100 92"><use href="#s-heart"/></svg></span>
+        <span class="idx br"><b>2</b><svg viewBox="0 0 100 92"><use href="#s-heart"/></svg></span>
+      </div>
       <h2 class="section-title">Save the Date</h2>
       <div class="divider" aria-hidden="true"><img src="assets/fleur-de-lis.svg" alt=""></div>
       <p class="lede">Formal invitation to follow.</p>
