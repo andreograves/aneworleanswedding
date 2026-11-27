@@ -8,6 +8,7 @@ Static wedding website (plain HTML/CSS/JS, no build step).
 - `styles.css` — colors, fonts, layout (palette variables at the top)
 - `script.js` — countdown + mobile menu
 - `assets/fleur-de-lis.svg` — the minimalist fleur-de-lis emblem
+- `assets/crossed-flags.svg` — Australian and American flags crossed at the poles (footer)
 - `CNAME` — custom domain for GitHub Pages
 - `assets/photos/` — couple photos (resized, metadata stripped)
 - `assets/save-the-date.ics` — calendar file for the "Add to Calendar" buttons (all-day, Jan 8 2028, The Capulet)

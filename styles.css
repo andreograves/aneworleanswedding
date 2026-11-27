@@ -278,3 +278,7 @@ h3 {
   .deco-right { right: -10px; }
   .deco-left { left: -10px; }
 }
+
+/* crossed Australian + American flags above the names */
+.footer-flags { display: block; width: 168px; height: auto; margin: 0 auto 10px; }
+@media (max-width: 820px) { .footer-flags { width: 140px; } }
