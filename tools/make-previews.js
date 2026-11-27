@@ -24,10 +24,10 @@ const parasolSVG = new Function(parasolSrc + "; return parasolSVG;")();
 // Title-card previews: the card under a deep maroon wash, with the words over it.
 const titleCSS = (k) => `
 .wash{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(58,14,22,.66) 0%,rgba(40,9,15,.8) 100%)}
-.title{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+.title{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:${44*k}px;
   text-shadow:0 2px 12px rgba(0,0,0,.35)}
 .title .a{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;color:#f6f0e4;font-size:${96*k}px;letter-spacing:.07em;line-height:1}
-.title .no{font-family:"Pinyon Script",cursive;color:#e6c887;font-size:${190*k}px;line-height:1.15;white-space:nowrap;margin:${-6*k}px 0 ${-10*k}px}
+.title .no{font-family:"Pinyon Script",cursive;color:#e6c887;font-size:${190*k}px;line-height:1.15;white-space:nowrap}
 .title .wed{display:flex;align-items:center;justify-content:center;gap:${22*k}px}
 .title .wed span{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;color:#f6f0e4;font-size:${112*k}px;letter-spacing:.07em;
   padding-left:.07em;text-transform:uppercase;line-height:1.1}
