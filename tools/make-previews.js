@@ -43,7 +43,7 @@ svg.art{width:100%;height:100%;display:block}
 body::after{content:"";position:absolute;inset:0;opacity:.3;mix-blend-mode:multiply;background-image:${grain}}</style></head>
 <body>${defs}<svg class="art" viewBox="0 0 250 350"><use href="#cardback"/></svg>
 <div class="parasol">${parasolSVG(["#f3ece0", "#5c1a24", "#c9a45f"])}</div>
-<div class="banner">${ribbon(900, 160)}<span>a New Orleans wedding</span></div></body></html>`;
+<div class="banner">${ribbon(900, 160)}<span>A New Orleans Wedding</span></div></body></html>`;
 // Square preview: the card on the cream background.
 const square = `<!doctype html><html><head>${SCRIPT}<style>*{margin:0;box-sizing:border-box}
 ${bannerCSS}
@@ -57,7 +57,7 @@ box-shadow:inset 0 0 0 1px rgba(60,30,20,.2),0 3px 4px rgba(0,0,0,.2),0 34px 70p
 .card::after{content:"";position:absolute;inset:0;opacity:.3;mix-blend-mode:multiply;background-image:${grain}}</style></head>
 <body>${defs}<div class="frame"></div><div class="card"><svg viewBox="0 0 250 350"><use href="#cardback"/></svg></div>
 <div class="parasol">${parasolSVG(["#c9a45f", "#f3ece0", "#5c1a24"])}</div>
-<div class="banner">${ribbon(820, 140)}<span>a New Orleans wedding</span></div></body></html>`;
+<div class="banner">${ribbon(820, 140)}<span>A New Orleans Wedding</span></div></body></html>`;
 
 (async () => {
   const browser = await chromium.launch();
