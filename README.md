@@ -12,8 +12,8 @@ Static wedding website (plain HTML/CSS/JS, no build step).
 - `CNAME` — custom domain for GitHub Pages
 - `assets/photos/` — couple photos (resized, metadata stripped)
 - `assets/save-the-date.ics` — calendar file for the "Add to Calendar" buttons (all-day, Jan 8 2028, The Capulet)
-- `assets/og-image.jpg` (photo link preview), `assets/og-image-cards.jpg` (cards version), `apple-touch-icon.png`, `assets/icon-512.png` — link previews and home-screen icons,
-  rendered by `node tools/make-previews.js` (layouts in `tools/preview-photo.html` and `tools/preview.html`)
+- `assets/og-card-portrait.jpg` (live link preview: "How about a New Orleans wedding?" on the card), `assets/og-image.jpg` and `assets/og-image-cards.jpg` (earlier versions), `apple-touch-icon.png`, `assets/icon-512.png` — link previews and home-screen icons,
+  rendered by `node tools/make-previews.js` (layouts in `tools/make-previews.js`, `tools/preview-*.html` and `tools/preview.html`)
 
 ## Preview locally
 Open `index.html` in a browser, or run `python3 -m http.server` and visit http://localhost:8000.

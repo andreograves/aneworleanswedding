@@ -56,14 +56,6 @@ const FONTS = `<link href="https://fonts.googleapis.com/css2?family=Pinyon+Scrip
 const portrait = `<!doctype html><html><head>${FONTS}<style>*{margin:0}body{width:1000px;height:1400px;overflow:hidden;position:relative;background:#efe9dd}
 svg.art{width:100%;height:100%;display:block}${titleCSS(1, {a: 285, no: 700, wed: 1125})}</style></head>
 <body>${defs}<svg class="art" viewBox="0 0 250 350"><use href="#cardback"/></svg>${titleHTML}</body></html>`;
-// Square preview: the tilted card on cream, all under the wash.
-const square = `<!doctype html><html><head>${FONTS}<style>*{margin:0;box-sizing:border-box}
-body{width:1200px;height:1200px;overflow:hidden;position:relative;background:radial-gradient(ellipse at center,#6a1f2b 0%,#4a121c 60%,#2e0a11 100%)}
-.card{position:absolute;left:50%;top:50%;width:640px;height:896px;margin:-448px 0 0 -320px;border-radius:36px;overflow:hidden;transform:rotate(-4deg);
-box-shadow:0 3px 4px rgba(0,0,0,.2),0 34px 70px rgba(60,18,24,.26)}
-.card svg{width:100%;height:100%;display:block}${titleCSS(1.04, {a: 310, no: 600, wed: 895})}</style></head>
-<body>${defs}<div class="card"><svg viewBox="0 0 250 350"><use href="#cardback"/></svg></div>${titleHTML}</body></html>`;
-
 (async () => {
   const browser = await chromium.launch();
   const jobs = [
@@ -72,7 +64,6 @@ box-shadow:0 3px 4px rgba(0,0,0,.2),0 34px 70px rgba(60,18,24,.26)}
     { html: tplCard.replace("<body>", '<body class="side-front">'), w: 1200, h: 630, out: "assets/og-card-front.jpg", type: "jpeg", file: "preview-card.html" },
     { html: tplCard.replace("<body>", '<body class="side-back">'), w: 1200, h: 630, out: "assets/og-card-back.jpg", type: "jpeg", file: "preview-card.html" },
     { html: portrait, w: 1000, h: 1400, out: "assets/og-card-portrait.jpg", type: "jpeg" },
-    { html: square, w: 1200, h: 1200, out: "assets/og-card-square.jpg", type: "jpeg" },
     { html: icon(180), w: 180, h: 180, out: "apple-touch-icon.png", type: "png" },
     { html: icon(512), w: 512, h: 512, out: "assets/icon-512.png", type: "png" },
   ];
