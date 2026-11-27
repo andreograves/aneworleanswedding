@@ -55,12 +55,12 @@ ${pos.oi ? `.title div.a,.title div.wed span{font-size:${112*k}px}
 .title .wed .p svg{display:block;width:100%;height:auto}
 .title .wed .p path[stroke="#3a2a22"]{stroke:#e6c887}`;
 };
-// Live preview copy: "Oi! / How about a / New Orleans / wedding, love?" (COPY=short renders the earlier version)
+// Live preview copy: "Oi! / How about a / New Orleans / wedding?" (COPY=short renders the earlier version)
 const OI = process.env.COPY !== "short";
 const parasolHTML = `<div class="p">${parasolSVG(["#f3ece0", "#c9a45f", "#e6c887"])}</div>`;
 const titleHTML = OI
   ? `<div class="wash"></div><div class="title"><div class="a oi">Oi!</div><div class="a">How about a</div><div class="no">New Orleans</div>
-<div class="wed"><div class="w"><span>wedding, love?</span>${parasolHTML}</div></div></div>`
+<div class="wed"><div class="w"><span>wedding?</span>${parasolHTML}</div></div></div>`
   : `<div class="wash"></div><div class="title"><div class="a">How about a</div><div class="no">New Orleans</div>
 <div class="wed"><div class="w"><span>wedding?</span>${parasolHTML}</div></div></div>`;
 const FONTS = `<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500${SUP.gf ? "&family=" + SUP.gf : ""}&display=swap" rel="stylesheet">`;
