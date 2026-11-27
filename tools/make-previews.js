@@ -62,7 +62,7 @@ ${pos.oi ? `.title div.a,.title div.wed span{font-size:${112*k}px}
 };
 // Live preview copy: "Oi! / How about a / New Orleans / wedding?" (COPY=short renders the earlier version)
 const OI = process.env.COPY !== "short";
-const CROSSED = process.env.PARASOLS === "crossed";
+const CROSSED = process.env.PARASOLS !== "single";  // live preview uses the crossed pair
 const goldParasol = parasolSVG(["#f3ece0", "#c9a45f", "#e6c887"]);
 const star = (cx, cy, r, n) => {
   const pts = [];
