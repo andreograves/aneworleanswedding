@@ -358,9 +358,21 @@
     return all(flights.concat([nudge]));
   }
 
+  // How big the revealed ace gets: about three-quarters of the screen height, never wider than
+  // ~82% of the screen, always leaving room below for "Geaux". Writes --grow so the CSS follows.
   function aceTarget() {
-    var cs = getComputedStyle(document.documentElement);
-    return { y: innerHeight * parseFloat(cs.getPropertyValue("--lift")) / 100, s: parseFloat(cs.getPropertyValue("--grow")) };
+    var root = document.documentElement, cs = getComputedStyle(root);
+    var lift = parseFloat(cs.getPropertyValue("--lift")) / 100;          // e.g. -0.05
+    var w = ace.el.offsetWidth, h = ace.el.offsetHeight, H = innerHeight, W = innerWidth;
+    var below = H * (0.5 - lift);                                        // card centre to bottom of screen
+    var s = Math.min(
+      (2 * (below - 96)) / h,     // keep ~96px under the card for the Geaux link
+      (0.78 * H) / h,             // about three-quarters of the screen height
+      (0.82 * W) / w              // never wider than ~82% of the screen
+    );
+    s = Math.max(1, s);
+    root.style.setProperty("--grow", s.toFixed(3));
+    return { y: H * lift, s: s };
   }
 
   // Reveal: pick the ace up, turn it over, set it down.
