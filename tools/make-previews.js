@@ -94,7 +94,7 @@ const titleHTML = OI
 const FONTS = `<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500${SUP.gf ? "&family=" + SUP.gf : ""}&display=swap" rel="stylesheet">`;
 // Card-shaped (5:7) preview: the card back edge to edge.
 const portrait = `<!doctype html><html><head>${FONTS}<style>*{margin:0}body{width:1000px;height:1400px;overflow:hidden;position:relative;background:#efe9dd}
-svg.art{width:100%;height:100%;display:block}${OI ? titleCSS(1, CROSSED ? {compact: true, a: 362, no: 672, wed: 982, cross: 1190} : {compact: true, a: 312, no: 700, wed: 1078}) : titleCSS(1, {a: 285, no: 700, wed: 1125})}</style></head>
+svg.art{width:100%;height:100%;display:block}${OI ? titleCSS(1, CROSSED ? {compact: true, a: 397, no: 672, wed: 947, cross: 1222} : {compact: true, a: 312, no: 700, wed: 1078}) : titleCSS(1, {a: 285, no: 700, wed: 1125})}</style></head>
 <body>${defs}<svg class="art" viewBox="0 0 250 350"><use href="#cardback"/></svg>${titleHTML}</body></html>`;
 (async () => {
   const browser = await chromium.launch();
