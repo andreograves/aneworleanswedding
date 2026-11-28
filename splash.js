@@ -76,6 +76,25 @@
     }
   };
 
+  // ---- Kookaburra laugh (original synthesis, tools/kookaburra.py) ----
+  var laughData = window.fetch ? fetch("assets/audio/kookaburra.mp3?v=1").then(function (r) { return r.arrayBuffer(); }).catch(function () { return null; }) : null;
+  var laughBuf = null;
+  function playLaugh(delayMs) {
+    if (!ctx || !laughData) return;
+    var go = function (buf) {
+      if (!buf) return;
+      var src = ctx.createBufferSource(), g = ctx.createGain();
+      src.buffer = buf; g.gain.value = 0.32;      // relative to the card sounds
+      src.connect(g); g.connect(master);
+      src.start(at(delayMs));
+    };
+    if (laughBuf) return go(laughBuf);
+    laughData.then(function (ab) {
+      if (!ab) return;
+      ctx.decodeAudioData(ab.slice(0), function (buf) { laughBuf = buf; go(buf); }, function () {});
+    });
+  }
+
   // ---- Music: gapless loop through Web Audio, <audio> element as fallback ----
   var LOOP_LEN = 59.295;          // exact loop length in seconds (21 bars at 85 bpm)
   var musicData = null, musicBuf = null, musicGain = null, musicSrc = null, musicOn = false;
@@ -385,6 +404,7 @@
       path.push({ transform: "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) rotate(" + (k * 1440) + "deg)" });
     }
     el.animate(path, { duration: dur, easing: "linear", fill: "forwards" }).finished.then(function () { el.remove(); });
+    playLaugh(dur + 120);   // kookaburra laughs once the boomerang is gone
     return wait(dur * hitAt);
   }
 
