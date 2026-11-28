@@ -364,20 +364,64 @@
   }
 
   // Reveal: pick the ace up, turn it over, set it down.
+  // ---------------- Boomerang ----------------
+  var BOOMERANG_SVG = '<svg viewBox="0 0 120 120" aria-hidden="true">' +
+    '<defs><linearGradient id="bwood" x1="0" y1="0" x2="1" y2="1">' +
+    '<stop offset="0" stop-color="#c48a52"/><stop offset=".5" stop-color="#9c6635"/><stop offset="1" stop-color="#7a4a24"/></linearGradient></defs>' +
+    '<path d="M14 86 C18 50 34 24 60 18 C86 24 102 50 106 86 C104 94 96 96 92 90 C86 60 76 42 60 38 C44 42 34 60 28 90 C24 96 16 94 14 86 Z" fill="url(#bwood)" stroke="#5e3818" stroke-width="1.6"/>' +
+    '<path d="M22 84 C26 56 40 34 60 28 C80 34 94 56 98 84" fill="none" stroke="#e0b47a" stroke-width="1.4" opacity=".55"/>' +
+    '<path d="M17 74 L27 77 M20 64 L30 68 M103 74 L93 77 M100 64 L90 68" stroke="#e6c887" stroke-width="3" stroke-linecap="round"/>' +
+    '</svg>';
+
+  // A boomerang flies in from stage left, clips the card on its way past and exits stage right.
+  // Resolves when it reaches the card, so the spin starts on contact.
+  function boomerangPass(cardY) {
+    var el = document.createElement("div");
+    el.className = "boomerang";
+    el.innerHTML = BOOMERANG_SVG;
+    document.body.appendChild(el);
+    var W = innerWidth, size = el.offsetWidth, y0 = innerHeight / 2 + cardY;
+    var dur = 1350, hitAt = 0.48;
+    if (ctx) sfx.whoosh(at(0), dur / 1000);
+    var path = [];
+    for (var i = 0; i <= 10; i++) {
+      var k = i / 10;
+      var x = -size + (W + size * 2) * k - size / 2;
+      var y = y0 - size / 2 + 70 * (1 - Math.pow((k - 0.5) * 2, 2)) * -1 + (k - 0.5) * -60;   // gentle arc
+      path.push({ transform: "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) rotate(" + (k * 1440) + "deg)" });
+    }
+    el.animate(path, { duration: dur, easing: "linear", fill: "forwards" }).finished.then(function () { el.remove(); });
+    return wait(dur * hitAt);
+  }
+
+  // Reveal: the ace slides to centre face down, the boomerang clips it, and it spins on its axis until it stops face up.
   function reveal() {
     var t = aceTarget();
     ace.el.style.zIndex = 500;
-    if (ctx) { sfx.slide(at(0), 0.5, 0.5); sfx.snap(at(760)); sfx.thump(at(1080), 0.35); }
-    var travel = anim(ace, [
-      { x: ace.x * 0.4, y: (ace.y + t.y) / 2, z: 130, r: ace.r * 0.3, rx: -6, offset: 0.45, easing: "cubic-bezier(.3,0,.4,1)" },
+    if (ctx) { sfx.slide(at(0), 0.5, 0.5); sfx.thump(at(980), 0.3); }
+    return anim(ace, [
+      { x: ace.x * 0.4, y: (ace.y + t.y) / 2, z: 90, r: ace.r * 0.3, offset: 0.5, easing: "cubic-bezier(.3,0,.4,1)" },
       { x: 0, y: t.y, z: 0, r: 0, rx: 0, s: t.s }
-    ], { duration: 1100, easing: "cubic-bezier(.25,.1,.25,1)" });
-    var flip = ace.inner.animate(
-      [{ transform: "rotateY(0deg)" }, { transform: "rotateY(105deg)", offset: 0.55 }, { transform: "rotateY(180deg)" }],
-      { duration: 880, delay: 260, easing: "cubic-bezier(.45,.05,.25,1)", fill: "forwards" }).finished;
-    return all([travel, flip]).then(function () {
-      return anim(ace, [{ s: t.s * 1.02, offset: 0.4 }, { s: t.s }], { duration: 260, easing: "ease-out" });
-    });
+    ], { duration: 1000, easing: "cubic-bezier(.25,.1,.25,1)" })
+      .then(function () { return wait(280); })
+      .then(function () { return boomerangPass(t.y); })
+      .then(function () {
+        var SPIN = 2800, TURNS = 1260;   // 3.5 turns: ends face up
+        if (ctx) {
+          sfx.snap(at(0));
+          // the card edge ticking past, slowing as it winds down
+          [0.05, 0.13, 0.23, 0.35, 0.49, 0.66, 0.86].forEach(function (f, n) { sfx.flick(at(f * SPIN), 0.9 - n * 0.09); });
+          sfx.thump(at(SPIN - 60), 0.4);
+        }
+        var nudge = anim(ace, [{ x: 16, r: 5, offset: 0.25 }, { x: 0, r: 0 }], { duration: 700, easing: "cubic-bezier(.2,.8,.3,1)" });
+        var spin = ace.inner.animate(
+          [{ transform: "rotateY(0deg)" }, { transform: "rotateY(" + TURNS + "deg)" }],
+          { duration: SPIN, easing: "cubic-bezier(.12,.75,.25,1)", fill: "forwards" }).finished;
+        return all([nudge, spin]);
+      })
+      .then(function () {
+        return anim(ace, [{ s: t.s * 1.02, offset: 0.4 }, { s: t.s }], { duration: 260, easing: "ease-out" });
+      });
   }
   // ---------------- Second-line parasols ----------------
   var PARASOL_SCHEMES = [
