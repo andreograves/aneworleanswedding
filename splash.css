@@ -154,6 +154,6 @@ body { cursor: pointer; }
   filter: drop-shadow(0 6px 8px rgba(60,18,24,.18)); }
 
 /* ---------- Boomerang ---------- */
-.boomerang { position: fixed; left: 0; top: 0; z-index: 900; width: clamp(90px, 17vmin, 150px); pointer-events: none;
+.boomerang { position: fixed; left: 0; top: 0; z-index: 900; width: clamp(120px, 24vmin, 210px); pointer-events: none;
   filter: drop-shadow(0 8px 10px rgba(60,18,24,.3)); will-change: transform; }
 .boomerang svg { display: block; width: 100%; height: auto; }

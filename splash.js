@@ -365,13 +365,7 @@
 
   // Reveal: pick the ace up, turn it over, set it down.
   // ---------------- Boomerang ----------------
-  var BOOMERANG_SVG = '<svg viewBox="0 0 120 120" aria-hidden="true">' +
-    '<defs><linearGradient id="bwood" x1="0" y1="0" x2="1" y2="1">' +
-    '<stop offset="0" stop-color="#c48a52"/><stop offset=".5" stop-color="#9c6635"/><stop offset="1" stop-color="#7a4a24"/></linearGradient></defs>' +
-    '<path d="M14 86 C18 50 34 24 60 18 C86 24 102 50 106 86 C104 94 96 96 92 90 C86 60 76 42 60 38 C44 42 34 60 28 90 C24 96 16 94 14 86 Z" fill="url(#bwood)" stroke="#5e3818" stroke-width="1.6"/>' +
-    '<path d="M22 84 C26 56 40 34 60 28 C80 34 94 56 98 84" fill="none" stroke="#e0b47a" stroke-width="1.4" opacity=".55"/>' +
-    '<path d="M17 74 L27 77 M20 64 L30 68 M103 74 L93 77 M100 64 L90 68" stroke="#e6c887" stroke-width="3" stroke-linecap="round"/>' +
-    '</svg>';
+  var BOOMERANG_SVG = '<svg viewBox="0 0 200 100" aria-hidden="true"> <defs> <linearGradient id="bOchre" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a9502a"/><stop offset=".3" stop-color="#c46a34"/><stop offset=".5" stop-color="#b65a2c"/><stop offset=".7" stop-color="#c8733a"/><stop offset="1" stop-color="#a44c27"/></linearGradient> <linearGradient id="bStain" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#734421"/><stop offset="1" stop-color="#4c2a15"/></linearGradient> <clipPath id="bTipL"><polygon points="70.5,10.9 28.1,78.7 -10,110 -10,-10"/></clipPath> <clipPath id="bTipR"><polygon points="129.5,10.9 171.9,78.7 210,110 210,-10"/></clipPath> </defs> <path d="M16.0 24.0 L80.0 64.0 Q100.0 75.0 120.0 64.0 L184.0 24.0" fill="none" stroke="#3a2010" stroke-width="19.2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M16.0 24.0 L80.0 64.0 Q100.0 75.0 120.0 64.0 L184.0 24.0" fill="none" stroke="url(#bOchre)" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/> <g clip-path="url(#bTipL)"><path d="M16.0 24.0 L80.0 64.0 Q100.0 75.0 120.0 64.0 L184.0 24.0" fill="none" stroke="url(#bStain)" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/></g> <g clip-path="url(#bTipR)"><path d="M16.0 24.0 L80.0 64.0 Q100.0 75.0 120.0 64.0 L184.0 24.0" fill="none" stroke="url(#bStain)" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/></g> <path d="M44.2 41.6 L17.3 24.8" stroke="#3a2010" stroke-width="10.5" stroke-linecap="round" opacity=".85"/> <path d="M44.2 41.6 L17.3 24.8" stroke="#6a3c1e" stroke-width="8.5" stroke-linecap="round"/> <path d="M155.8 41.6 L182.7 24.8" stroke="#3a2010" stroke-width="10.5" stroke-linecap="round" opacity=".85"/> <path d="M155.8 41.6 L182.7 24.8" stroke="#6a3c1e" stroke-width="8.5" stroke-linecap="round"/> <path d="M44.1 53.0 L54.4 36.6" stroke="#f3ece0" stroke-width="2.2"/> <path d="M145.6 36.6 L155.9 53.0" stroke="#f3ece0" stroke-width="2.2"/> </svg>';
 
   // A boomerang flies in from stage left, clips the card on its way past and exits stage right.
   // Resolves when it reaches the card, so the spin starts on contact.
@@ -387,7 +381,7 @@
     for (var i = 0; i <= 10; i++) {
       var k = i / 10;
       var x = -size + (W + size * 2) * k - size / 2;
-      var y = y0 - size / 2 + 70 * (1 - Math.pow((k - 0.5) * 2, 2)) * -1 + (k - 0.5) * -60;   // gentle arc
+      var y = y0 - el.offsetHeight / 2 + 70 * (1 - Math.pow((k - 0.5) * 2, 2)) * -1 + (k - 0.5) * -60;   // gentle arc
       path.push({ transform: "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) rotate(" + (k * 1440) + "deg)" });
     }
     el.animate(path, { duration: dur, easing: "linear", fill: "forwards" }).finished.then(function () { el.remove(); });
