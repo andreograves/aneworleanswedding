@@ -364,20 +364,58 @@
   }
 
   // Reveal: pick the ace up, turn it over, set it down.
+  // ---------------- Boomerang ----------------
+  var BOOMERANG_SVG = '<svg viewBox="0 0 200 100" aria-hidden="true"> <defs> <linearGradient id="bOchre" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a9502a"/><stop offset=".3" stop-color="#c46a34"/><stop offset=".5" stop-color="#b65a2c"/><stop offset=".7" stop-color="#c8733a"/><stop offset="1" stop-color="#a44c27"/></linearGradient> <linearGradient id="bStain" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#734421"/><stop offset="1" stop-color="#4c2a15"/></linearGradient> <clipPath id="bTipL"><polygon points="70.5,10.9 28.1,78.7 -10,110 -10,-10"/></clipPath> <clipPath id="bTipR"><polygon points="129.5,10.9 171.9,78.7 210,110 210,-10"/></clipPath> </defs> <path d="M16.0 24.0 L80.0 64.0 Q100.0 75.0 120.0 64.0 L184.0 24.0" fill="none" stroke="#3a2010" stroke-width="19.2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M16.0 24.0 L80.0 64.0 Q100.0 75.0 120.0 64.0 L184.0 24.0" fill="none" stroke="url(#bOchre)" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/> <g clip-path="url(#bTipL)"><path d="M16.0 24.0 L80.0 64.0 Q100.0 75.0 120.0 64.0 L184.0 24.0" fill="none" stroke="url(#bStain)" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/></g> <g clip-path="url(#bTipR)"><path d="M16.0 24.0 L80.0 64.0 Q100.0 75.0 120.0 64.0 L184.0 24.0" fill="none" stroke="url(#bStain)" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/></g> <path d="M44.2 41.6 L17.3 24.8" stroke="#3a2010" stroke-width="10.5" stroke-linecap="round" opacity=".85"/> <path d="M44.2 41.6 L17.3 24.8" stroke="#6a3c1e" stroke-width="8.5" stroke-linecap="round"/> <path d="M155.8 41.6 L182.7 24.8" stroke="#3a2010" stroke-width="10.5" stroke-linecap="round" opacity=".85"/> <path d="M155.8 41.6 L182.7 24.8" stroke="#6a3c1e" stroke-width="8.5" stroke-linecap="round"/> <path d="M44.1 53.0 L54.4 36.6" stroke="#f3ece0" stroke-width="2.2"/> <path d="M145.6 36.6 L155.9 53.0" stroke="#f3ece0" stroke-width="2.2"/> </svg>';
+
+  // A boomerang flies in from stage left, clips the card on its way past and exits stage right.
+  // Resolves when it reaches the card, so the spin starts on contact.
+  function boomerangPass(cardY) {
+    var el = document.createElement("div");
+    el.className = "boomerang";
+    el.innerHTML = BOOMERANG_SVG;
+    document.body.appendChild(el);
+    var W = innerWidth, size = el.offsetWidth, y0 = innerHeight / 2 + cardY;
+    var dur = 1350, hitAt = 0.48;
+    if (ctx) sfx.whoosh(at(0), dur / 1000);
+    var path = [];
+    for (var i = 0; i <= 10; i++) {
+      var k = i / 10;
+      var x = -size + (W + size * 2) * k - size / 2;
+      var y = y0 - el.offsetHeight / 2 + 70 * (1 - Math.pow((k - 0.5) * 2, 2)) * -1 + (k - 0.5) * -60;   // gentle arc
+      path.push({ transform: "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) rotate(" + (k * 1440) + "deg)" });
+    }
+    el.animate(path, { duration: dur, easing: "linear", fill: "forwards" }).finished.then(function () { el.remove(); });
+    return wait(dur * hitAt);
+  }
+
+  // Reveal: the ace slides to centre face down, the boomerang clips it, and it spins on its axis until it stops face up.
   function reveal() {
     var t = aceTarget();
     ace.el.style.zIndex = 500;
-    if (ctx) { sfx.slide(at(0), 0.5, 0.5); sfx.snap(at(760)); sfx.thump(at(1080), 0.35); }
-    var travel = anim(ace, [
-      { x: ace.x * 0.4, y: (ace.y + t.y) / 2, z: 130, r: ace.r * 0.3, rx: -6, offset: 0.45, easing: "cubic-bezier(.3,0,.4,1)" },
+    if (ctx) { sfx.slide(at(0), 0.5, 0.5); sfx.thump(at(980), 0.3); }
+    return anim(ace, [
+      { x: ace.x * 0.4, y: (ace.y + t.y) / 2, z: 90, r: ace.r * 0.3, offset: 0.5, easing: "cubic-bezier(.3,0,.4,1)" },
       { x: 0, y: t.y, z: 0, r: 0, rx: 0, s: t.s }
-    ], { duration: 1100, easing: "cubic-bezier(.25,.1,.25,1)" });
-    var flip = ace.inner.animate(
-      [{ transform: "rotateY(0deg)" }, { transform: "rotateY(105deg)", offset: 0.55 }, { transform: "rotateY(180deg)" }],
-      { duration: 880, delay: 260, easing: "cubic-bezier(.45,.05,.25,1)", fill: "forwards" }).finished;
-    return all([travel, flip]).then(function () {
-      return anim(ace, [{ s: t.s * 1.02, offset: 0.4 }, { s: t.s }], { duration: 260, easing: "ease-out" });
-    });
+    ], { duration: 1000, easing: "cubic-bezier(.25,.1,.25,1)" })
+      .then(function () { return wait(280); })
+      .then(function () { return boomerangPass(t.y); })
+      .then(function () {
+        var SPIN = 2800, TURNS = 1260;   // 3.5 turns: ends face up
+        if (ctx) {
+          sfx.snap(at(0));
+          // the card edge ticking past, slowing as it winds down
+          [0.05, 0.13, 0.23, 0.35, 0.49, 0.66, 0.86].forEach(function (f, n) { sfx.flick(at(f * SPIN), 0.9 - n * 0.09); });
+          sfx.thump(at(SPIN - 60), 0.4);
+        }
+        var nudge = anim(ace, [{ x: 16, r: 5, offset: 0.25 }, { x: 0, r: 0 }], { duration: 700, easing: "cubic-bezier(.2,.8,.3,1)" });
+        var spin = ace.inner.animate(
+          [{ transform: "rotateY(0deg)" }, { transform: "rotateY(" + TURNS + "deg)" }],
+          { duration: SPIN, easing: "cubic-bezier(.12,.75,.25,1)", fill: "forwards" }).finished;
+        return all([nudge, spin]);
+      })
+      .then(function () {
+        return anim(ace, [{ s: t.s * 1.02, offset: 0.4 }, { s: t.s }], { duration: 260, easing: "ease-out" });
+      });
   }
   // ---------------- Second-line parasols ----------------
   var PARASOL_SCHEMES = [
